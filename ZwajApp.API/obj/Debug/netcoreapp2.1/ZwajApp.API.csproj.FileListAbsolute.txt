@@ -1,0 +1,17 @@
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\appsettings.Development.json
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\appsettings.json
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\ZwajApp.API.deps.json
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\ZwajApp.API.runtimeconfig.json
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\ZwajApp.API.runtimeconfig.dev.json
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\ZwajApp.API.dll
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\ZwajApp.API.pdb
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\obj\Debug\netcoreapp2.1\ZwajApp.API.csprojAssemblyReference.cache
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\obj\Debug\netcoreapp2.1\ZwajApp.API.AssemblyInfoInputs.cache
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\obj\Debug\netcoreapp2.1\ZwajApp.API.AssemblyInfo.cs
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\obj\Debug\netcoreapp2.1\ZwajApp.API.csproj.CoreCompileInputs.cache
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\obj\Debug\netcoreapp2.1\ZwajApp.API.RazorAssemblyInfo.cache
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\obj\Debug\netcoreapp2.1\ZwajApp.API.RazorAssemblyInfo.cs
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\obj\Debug\netcoreapp2.1\ZwajApp.API.RazorTargetAssemblyInfo.cache
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\obj\Debug\netcoreapp2.1\ZwajApp.API.dll
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\obj\Debug\netcoreapp2.1\ZwajApp.API.pdb
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\obj\Debug\netcoreapp2.1\ZwajApp.API.genruntimeconfig.cache
