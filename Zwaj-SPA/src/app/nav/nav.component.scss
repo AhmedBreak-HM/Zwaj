@@ -3,6 +3,18 @@
   color: pink !important;
   cursor: pointer;
 }
+.navv-link:hover, .navv-link:focus {
+  text-decoration: none;
+  color: pink !important;
+  cursor: pointer;
+}
+.navv-link{
+  letter-spacing:0.5px;
+  font-weight:bold;
+  font-family:'JF-Flat';
+  font-size:1.0rem
+
+}
 
 .nav-link {
 color:white !important;
