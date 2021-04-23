@@ -19,7 +19,6 @@ export class NavComponent implements OnInit {
     this.authService.login(this.model).subscribe(
       res => {
         this.alert.success('تم تسجيل الدخول بنجاح');
-
         console.log('تم تسجيل الدخول بنجاح')
       }, err => {
         this.alert.error('login error is ' + err);
@@ -28,8 +27,7 @@ export class NavComponent implements OnInit {
     );
   }
   loggedin() {
-    const token = localStorage.getItem('token');
-    return !!token;
+    return ! this.authService.isUser();
   }
   loggedOut() {
     localStorage.removeItem('token');
