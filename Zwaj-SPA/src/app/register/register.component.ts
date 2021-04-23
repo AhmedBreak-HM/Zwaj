@@ -21,7 +21,6 @@ export class RegisterComponent implements OnInit {
       ()=> console.log('register is succes'),
       err => console.log('register is error' + err)
       );
-    console.log(this.model);
   }
   cancel(){
     console.log(' not now ');

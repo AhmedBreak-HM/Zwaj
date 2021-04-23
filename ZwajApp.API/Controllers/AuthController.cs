@@ -40,7 +40,7 @@ namespace ZwajApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-
+            // throw new Exception("Api is very taired");
             var userForRepo = await _repo.Login(userForLoginDto.UserName, userForLoginDto.PassWord);
             if (userForRepo == null) return Unauthorized();
             // genreat Claims from userForRepo
