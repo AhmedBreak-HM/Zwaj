@@ -10,6 +10,7 @@ import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvidor } from './services/error.interceptor';
+import { AlertifyService } from './services/alertify.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ErrorInterceptorProvidor } from './services/error.interceptor';
   providers: [
     AuthService,
     // Globsl Http Interceptor
-    ErrorInterceptorProvidor
+    ErrorInterceptorProvidor,
+    AlertifyService
   ],
   bootstrap: [AppComponent]
 })
