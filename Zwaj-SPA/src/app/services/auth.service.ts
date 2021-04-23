@@ -32,7 +32,7 @@ export class AuthService {
     this.DecodToken = this.jwtHelper.decodeToken(token);
     return this.jwtHelper.isTokenExpired(token);
   }
-  DecodToken(){
+  DecodToken() {
     const token = localStorage.getItem('token');
     const user = this.jwtHelper.decodeToken(token);
     return user;

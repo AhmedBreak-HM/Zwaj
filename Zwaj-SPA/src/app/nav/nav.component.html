@@ -3,7 +3,7 @@
 font-family:ToyorAljanah;font-size:2.25rem;font-weight:bolder" class="navbar-brand" href="#"><i class="fa fa-heart"
       aria-hidden="true"></i>زواج<i class="fa fa-heart" aria-hidden="true"></i></a>
 
-  <ul style="letter-spacing:1px;font-weight:bold;font-family:'JF Flat';font-size:1.2rem" class="navbar-nav mr-auto">
+  <ul *ngIf="loggedin()" style="letter-spacing:1px;font-weight:bold;font-family:'JF Flat';font-size:1.2rem" class="navbar-nav mr-auto">
     <li class="nav-item">
       <a class="nav-link">الرئيسية </a>
     </li>
@@ -16,25 +16,24 @@ font-family:ToyorAljanah;font-size:2.25rem;font-weight:bolder" class="navbar-bra
     <li class="nav-item">
       <a class="nav-link">دردشة</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" (click)="loggedOut()" *ngIf="loggedin()">خروج</a>
-    </li>
   </ul>
 
-  <div class="dropdown" *ngIf="loggedin()">
-    <a style="font-weight:bold;font-family:'JF-Flat';font-size:1.0rem" class="dropdown-toggle text-light nav-link"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
+  <div dropdown *ngIf="loggedin()">
+    <a dropdownToggle style="font-weight:bold;font-family:'JF-Flat';font-size:1.0rem"
+      class="dropdown-toggle text-light nav-link">
       مرحبا بك
       {{user.unique_name |titlecase}}
     </a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item">ملف الشخصى</a>
+    <div *dropdownMenu class="dropdown-menu">
+      <a href="#" class="dropdown-item"><i class="fa fa-user" aria-hidden="true"></i>
+        ملف الشخصى</a>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item"><i class="fa fa-sign-out" aria-hidden="true"></i>
+      <a (click)="loggedOut()" href="#" class="dropdown-item "><i class="fa fa-sign-out" aria-hidden="true"></i>
         تسجيل الخروج</a>
     </div>
   </div>
 
-  <form #Loginform="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()" *ngIf="!loggedin()">
+  <form #Loginform="ngForm" class="ml-5 form-inline my-2 my-lg-0" (ngSubmit)="login()" *ngIf="!loggedin()">
     <input required name="username" class="form-control mr-sm-2" type="text" [(ngModel)]="model.username"
       placeholder="إسم المشترك">
     <input required name="password" class="form-control mr-sm-2" type="password" [(ngModel)]="model.password"

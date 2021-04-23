@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
 export class NavComponent implements OnInit {
 
   model: any = {};
-  user:any;
+  user: any;
   constructor(private authService: AuthService, private alert: AlertifyService) { }
 
   ngOnInit() {
@@ -20,7 +20,7 @@ export class NavComponent implements OnInit {
     this.authService.login(this.model).subscribe(
       res => {
         this.alert.success('تم تسجيل الدخول بنجاح');
-        console.log('تم تسجيل الدخول بنجاح')
+        this.user.unique_name = this.model.username;
       }, err => {
         this.alert.error('login error is ' + err);
         console.log('login error is ' + err)
