@@ -27,8 +27,14 @@ export class AuthService {
   register(model: any) {
     return this.http.post(`${this.baseUrl}/register`, model);
   }
-  isUser(){
+  isUser() {
     const token = localStorage.getItem('token');
+    this.DecodToken = this.jwtHelper.decodeToken(token);
     return this.jwtHelper.isTokenExpired(token);
+  }
+  DecodToken(){
+    const token = localStorage.getItem('token');
+    const user = this.jwtHelper.decodeToken(token);
+    return user;
   }
 }

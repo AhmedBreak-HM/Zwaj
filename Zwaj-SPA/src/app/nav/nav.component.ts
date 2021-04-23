@@ -10,10 +10,11 @@ import { AuthService } from '../services/auth.service';
 export class NavComponent implements OnInit {
 
   model: any = {};
-
+  user:any;
   constructor(private authService: AuthService, private alert: AlertifyService) { }
 
   ngOnInit() {
+    this.user = this.authService.DecodToken();
   }
   login() {
     this.authService.login(this.model).subscribe(
@@ -27,7 +28,11 @@ export class NavComponent implements OnInit {
     );
   }
   loggedin() {
-    return ! this.authService.isUser();
+    try {
+      return !this.authService.isUser();
+    } catch {
+      return false;
+    }
   }
   loggedOut() {
     localStorage.removeItem('token');
