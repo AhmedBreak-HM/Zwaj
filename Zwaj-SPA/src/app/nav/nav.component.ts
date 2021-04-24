@@ -22,7 +22,7 @@ export class NavComponent implements OnInit {
       res => {
         this.alert.success('تم تسجيل الدخول بنجاح');
       }, err => {
-        this.alert.error('login error is ' + err);
+        this.alert.error('login error is : ' + err);
       },
       () => {
         this.user.unique_name = this.model.username;
