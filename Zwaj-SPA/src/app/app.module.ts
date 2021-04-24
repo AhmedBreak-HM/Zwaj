@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AuthService } from './services/auth.service';
+import { AuthGuard } from './services/guards/auth.guard';
 import { AlertifyService } from './services/alertify.service';
 import { ErrorInterceptorProvidor } from './services/error.interceptor';
 
@@ -44,7 +45,9 @@ import { MessagesComponent } from './messages/messages.component';
     AuthService,
     // Globsl Http Interceptor
     ErrorInterceptorProvidor,
-    AlertifyService
+    AlertifyService,
+    // Guards
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
