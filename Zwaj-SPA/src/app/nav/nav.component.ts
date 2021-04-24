@@ -20,27 +20,23 @@ export class NavComponent implements OnInit {
   login() {
     this.authService.login(this.model).subscribe(
       res => {
-        this.user.unique_name = this.model.username;
         this.alert.success('تم تسجيل الدخول بنجاح');
       }, err => {
-        this.alert.error('login error is ' + err);
-        console.log('login error is ' + err)
+        this.alert.error('login error is : ' + err);
       },
-      () => this.router.navigate(['/members'])
+      () => {
+        this.user.unique_name = this.model.username;
+        this.router.navigate(['/members']);
+      }
     );
   }
   loggedin() {
-    try {
-      return !this.authService.isUser();
-    } catch {
-      return false;
-    }
+    return this.authService.isUser();
   }
   loggedOut() {
     localStorage.removeItem('token');
     this.alert.warning('تم تسجيل الخروج');
     this.router.navigate(['/home']);
-    console.log('تم تسجيل الخروج');
   }
 
 }
