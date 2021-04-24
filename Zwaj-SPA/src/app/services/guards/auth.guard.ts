@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       this.alert.error('يجب عليك تسجيل الدخول اولا');
-      this.router.navigate(['/home']);
+      this.router.navigate(['']);
       return false;
     }
   }
