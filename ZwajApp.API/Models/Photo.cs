@@ -9,6 +9,8 @@ namespace ZwajApp.API.Models
         public string Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public bool IsMaine { get; set; }
+        public User User { get; set; }
+        public int UserId { get; set; }
 
     }
 }
