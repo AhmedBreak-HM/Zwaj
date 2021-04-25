@@ -46,13 +46,15 @@ namespace ZwajApp.API
             services.AddCors();
             // add Corss services
 
-            // Add Trial Data service
-            services.AddTransient<TrialData>();
-
             // add Auth Repo to Genreate new  instance
             services.AddScoped<IAuthRepository, AuthRepository>();
             // add Auth Repo to Genreate new  instance
 
+            // Add Trial Data service
+            services.AddTransient<TrialData>();
+
+            // Add Zwaj Repo
+            services.AddScoped<IZwajRepository, ZwajRepository>();
 
             // add Authentication services
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
