@@ -46,6 +46,9 @@ namespace ZwajApp.API
             services.AddCors();
             // add Corss services
 
+            // Add Trial Data service
+            services.AddTransient<TrialData>();
+
             // add Auth Repo to Genreate new  instance
             services.AddScoped<IAuthRepository, AuthRepository>();
             // add Auth Repo to Genreate new  instance
@@ -62,16 +65,16 @@ namespace ZwajApp.API
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
-
-
             });
+
+
 
 
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, TrialData trialData)
         {
             if (env.IsDevelopment())
             {
@@ -100,6 +103,7 @@ namespace ZwajApp.API
             }
 
             // app.UseHttpsRedirection();
+            // trialData.TrialUsers();
             // add Corss MidllWare 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             // add Corss MidllWare

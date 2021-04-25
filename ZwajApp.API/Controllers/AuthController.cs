@@ -32,7 +32,7 @@ namespace ZwajApp.API.Controllers
             // Validation
             userForRegisterDto.UserName = userForRegisterDto.UserName.ToLower();
             if (await _repo.UserExists(userForRegisterDto.UserName) == true) return BadRequest("هذا المستخدم موجود مسبقا");
-            var userToCreate = new User { Name = userForRegisterDto.UserName };
+            var userToCreate = new User { Username = userForRegisterDto.UserName };
             var userCreated = await _repo.Register(userToCreate, userForRegisterDto.PassWord);
             return StatusCode(201);
         }
@@ -46,7 +46,7 @@ namespace ZwajApp.API.Controllers
             // genreat Claims from userForRepo
             var claims = new[] {
                 new Claim(ClaimTypes.NameIdentifier, userForRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userForRepo.Name)
+                new Claim(ClaimTypes.Name, userForRepo.Username)
             };
 
             // genreated key and convert to bytes

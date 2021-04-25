@@ -1,5 +1,6 @@
 F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\appsettings.Development.json
 F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\appsettings.json
+F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\Data\UserTrialData.json
 F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\ZwajApp.API.deps.json
 F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\ZwajApp.API.runtimeconfig.json
 F:\projctBreak\projctes2020\Zwaj\ZwajApp.API\bin\Debug\netcoreapp2.1\ZwajApp.API.runtimeconfig.dev.json

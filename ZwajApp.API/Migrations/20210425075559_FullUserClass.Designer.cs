@@ -9,7 +9,7 @@ using ZwajApp.API.Data;
 namespace ZwajApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210425023352_FullUserClass")]
+    [Migration("20210425075559_FullUserClass")]
     partial class FullUserClass
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace ZwajApp.API.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<bool>("IsMaine");
+                    b.Property<bool>("IsMain");
 
                     b.Property<string>("Url");
 
@@ -49,11 +49,11 @@ namespace ZwajApp.API.Migrations
 
                     b.Property<string>("Country");
 
-                    b.Property<DateTime>("CreatedAt");
+                    b.Property<DateTime>("Created");
 
                     b.Property<DateTime>("DateOfBirth");
 
-                    b.Property<bool>("Gender");
+                    b.Property<string>("Gender");
 
                     b.Property<string>("Interests");
 
@@ -61,15 +61,15 @@ namespace ZwajApp.API.Migrations
 
                     b.Property<string>("KnownAs");
 
-                    b.Property<DateTime>("LasteActive");
+                    b.Property<DateTime>("LastActive");
 
                     b.Property<string>("LookingFor");
-
-                    b.Property<string>("Name");
 
                     b.Property<byte[]>("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt");
+
+                    b.Property<string>("Username");
 
                     b.HasKey("Id");
 

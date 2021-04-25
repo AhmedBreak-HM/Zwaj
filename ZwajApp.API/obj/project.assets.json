@@ -12226,11 +12226,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
+      "projectUniqueName": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
       "projectName": "ZwajApp.API",
-      "projectPath": "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
+      "projectPath": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
       "packagesPath": "C:\\Users\\break\\.nuget\\packages\\",
-      "outputPath": "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\obj\\",
+      "outputPath": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\break\\AppData\\Roaming\\NuGet\\NuGet.Config",
