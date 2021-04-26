@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -45,6 +46,9 @@ namespace ZwajApp.API
             // add Corss services
             services.AddCors();
             // add Corss services
+
+            // add Auto Mapper
+            services.AddAutoMapper();
 
             // add Auth Repo to Genreate new  instance
             services.AddScoped<IAuthRepository, AuthRepository>();

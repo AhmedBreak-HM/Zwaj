@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ZwajApp.API.Data;
+using ZwajApp.API.Dtos;
 
 namespace ZwajApp.API.Controllers
 {
@@ -11,8 +14,10 @@ namespace ZwajApp.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IZwajRepository _repo;
-        public UsersController(IZwajRepository repo)
+        private readonly IMapper _mapper;
+        public UsersController(IZwajRepository repo, IMapper mapper)
         {
+            _mapper = mapper;
             _repo = repo;
         }
 
@@ -20,14 +25,16 @@ namespace ZwajApp.API.Controllers
         public async Task<IActionResult> GetUsers()
         {
             var users = await _repo.GetUsers();
-            return Ok(users);
+            var UsersToReturn =_mapper.Map<IEnumerable<UserForListDto>>(users);
+            return Ok(UsersToReturn);
 
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
             var user = await _repo.GetUser(id);
-            return Ok(user);
+            var userToReturn = _mapper.Map<UserForDetails>(user);
+            return Ok(userToReturn);
         }
 
     }
