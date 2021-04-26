@@ -16,7 +16,7 @@ namespace ZwajApp.API.Data
         public async Task<User> Login(string username, string password)
         {
             // chek user name is exists
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.Name == username);
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
             if (user == null) return null;
             // chek password hash equal passord
             if (!VerifyPasswordHash(password, user.PasswordSalt, user.PasswordHash)) return null;
@@ -46,7 +46,7 @@ namespace ZwajApp.API.Data
         {
             // var isUser = await _context.Users.FindAsync(username);
             // var user = await _context.Users.FirstOrDefaultAsync(x => x.Name == username);
-            var user = await _context.Users.AnyAsync(x => x.Name == username);
+            var user = await _context.Users.AnyAsync(x => x.Username == username);
             
             return user;
             // return user != null ? true : false;
