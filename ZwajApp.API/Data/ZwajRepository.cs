@@ -32,7 +32,7 @@ namespace ZwajApp.API.Data
 
         public async Task<IEnumerable<User>> GetUsers()
         {
-            var users = await _context.Users.ToListAsync();
+            var users = await _context.Users.Include(x => x.Photos).ToListAsync();
             return users;
         }
 
