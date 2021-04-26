@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../models/user';
+import { AlertifyService } from '../services/alertify.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-member-list',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemberListComponent implements OnInit {
 
-  constructor() { }
+  users: User[] =[];
+
+  constructor(private userService: UserService,private alert: AlertifyService) { }
 
   ngOnInit() {
+    this.loadUsers();
+  }
+  loadUsers(){
+    this.userService.getUsers().subscribe(res => {
+      this.users = res;
+    },err => this.alert.error(err));
   }
 
 }
