@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { JwtModule } from "@auth0/angular-jwt";
+import { TabsModule } from 'ngx-bootstrap/tabs';
+
 
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
@@ -60,7 +62,8 @@ export function tokenGetter() {
     // ---------------------------------------------------------
     FormsModule,
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
 
   ],
   providers: [
