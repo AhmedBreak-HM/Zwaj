@@ -24,6 +24,7 @@ import { MemberListComponent } from './member/member-list/member-list.component'
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MemberCardComponent } from './member/member-card/member-card.component';
+import { MemberDetailsComponent } from './member/member-details/member-details.component';
 
 
 export function tokenGetter() {
@@ -40,7 +41,8 @@ export function tokenGetter() {
     MemberListComponent,
     ListsComponent,
     MessagesComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    MemberDetailsComponent
   ],
   imports: [
     BrowserModule,
