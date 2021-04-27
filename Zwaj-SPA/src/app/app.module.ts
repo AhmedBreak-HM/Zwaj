@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { JwtModule } from "@auth0/angular-jwt";
 
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
@@ -24,6 +25,12 @@ import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MemberCardComponent } from './member/member-card/member-card.component';
 
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +46,16 @@ import { MemberCardComponent } from './member/member-card/member-card.component'
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    // @auth0/angular-jwt send token with http header request
+    // https://github.com/auth0/angular2-jwt
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:5000'],
+        disallowedRoutes: ['localhost:5000/api/auth'],
+      },
+    }),
+    // ---------------------------------------------------------
     FormsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot()
