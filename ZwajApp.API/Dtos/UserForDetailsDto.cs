@@ -4,7 +4,7 @@ using ZwajApp.API.Models;
 
 namespace ZwajApp.API.Dtos
 {
-    public class UserForDetails
+    public class UserForDetailsDto
     {
         public int Id { get; set; }
         public string Username { get; set; }

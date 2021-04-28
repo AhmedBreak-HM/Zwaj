@@ -22,7 +22,7 @@ font-family:ToyorAljanah;font-size:2.25rem;font-weight:bolder" class="navbar-bra
     <a dropdownToggle style="font-weight:bold;font-family:'JF-Flat';font-size:1.0rem"
       class="dropdown-toggle text-light nav-link">
       مرحبا بك
-      {{user.unique_name |titlecase}}
+      {{user?.unique_name || userName|titlecase}}
     </a>
     <div *dropdownMenu class="dropdown-menu">
       <a class="dropdown-item navv-link"><i class="fa fa-user" aria-hidden="true"></i>

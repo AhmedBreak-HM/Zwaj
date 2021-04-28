@@ -11,7 +11,8 @@ import { AuthService } from '../services/auth.service';
 export class NavComponent implements OnInit {
 
   model: any = {};
-  user: any;
+  user: any = {};
+  userName: string = '';
   constructor(private authService: AuthService, private alert: AlertifyService, private router: Router) { }
 
   ngOnInit() {
@@ -20,12 +21,12 @@ export class NavComponent implements OnInit {
   login() {
     this.authService.login(this.model).subscribe(
       res => {
-        this.alert.success('تم تسجيل الدخول بنجاح');
+        this.userName = res.username;
+        this.alert.success(this.userName + ' مرحبا بك يا ');
       }, err => {
         this.alert.error('login error is : ' + err);
       },
       () => {
-        this.user.unique_name = this.model.username;
         this.router.navigate(['/members']);
       }
     );

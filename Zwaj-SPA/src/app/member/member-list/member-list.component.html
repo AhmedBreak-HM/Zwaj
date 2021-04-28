@@ -1,0 +1,8 @@
+<div class="rtl container">
+  <div class="row">
+    <div *ngFor="let item of users |async" class="col-lg-2 col-md-3 col-sm-6">
+        <app-member-card [user]='item'></app-member-card>
+    </div>
+  </div>
+
+</div>
