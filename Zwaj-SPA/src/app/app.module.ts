@@ -15,6 +15,7 @@ import { UserService } from './services/user.service';
 import { AuthGuard } from './services/guards/auth.guard';
 import { AlertifyService } from './services/alertify.service';
 import { ErrorInterceptorProvidor } from './services/error.interceptor';
+import { MemberDetailsResolver } from './resolvers/member-details.resolver';
 
 
 import { AppComponent } from './app.component';
@@ -72,6 +73,10 @@ export function tokenGetter() {
     ErrorInterceptorProvidor,
     // Guards
     AuthGuard,
+
+
+    // Resolvers
+    MemberDetailsResolver,
 
     // Services
     AuthService,
