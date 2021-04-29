@@ -1,0 +1,8 @@
+<!-- <div *ngIf="user$">
+  <p>member-edit works!{{(user$|async).username}}</p>
+
+</div> -->
+<div *ngIf="user$ |async as user">
+  <p>member-edit works! {{user.username}}</p>
+
+</div>

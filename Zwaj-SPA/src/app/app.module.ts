@@ -29,6 +29,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { MemberCardComponent } from './member/member-card/member-card.component';
 import { MemberDetailsComponent } from './member/member-details/member-details.component';
 import { MemberGalleryComponent } from './member/member-gallery/member-gallery.component';
+import { MemberEditComponent } from './member/member-edit/member-edit.component';
 
 //  this code for ngx-gallery solve problem
 export class CustomHammerConfig extends HammerGestureConfig  {
@@ -53,7 +54,8 @@ export function tokenGetter() {
     MessagesComponent,
     MemberCardComponent,
     MemberDetailsComponent,
-    MemberGalleryComponent
+    MemberGalleryComponent,
+    MemberEditComponent
   ],
   imports: [
     BrowserModule,
