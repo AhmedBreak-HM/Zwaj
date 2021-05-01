@@ -12,7 +12,7 @@
       <h1>الملف الشخصي</h1>
     </div>
     <div class="col-sm-8">
-      <div class="alert alert-info">
+      <div *ngIf="editForm.dirty" class="alert alert-info">
         <strong>تنويه :</strong>
         يجب حفظ التعديلات التي تمت على ملفك الشخصي
       </div>
@@ -41,7 +41,8 @@
         <div class="card-footer">
           <div>
 
-            <button class="btn btn-success btn-block">حفظ التعديلات</button>
+            <button form="editForm" [disabled]="!editForm.dirty" class="btn btn-success btn-block">حفظ
+              التعديلات</button>
           </div>
         </div>
       </div>
@@ -50,47 +51,50 @@
       <div class="tab-Panel">
         <tabset class="member-tabset">
           <tab heading="بياناتي">
-            <div class="card">
-              <div class="card-header">
-                <h4>أعرفك بنفسي</h4>
-              </div>
-              <div class="card-text mt-3 p-2">
-                <textarea name="introduction" [(ngModel)]="user.introduction"
-                  class="form-control border-white"></textarea>
-              </div>
-            </div>
-
-            <div class="card mt-4">
-              <div class="card-header">
-                <h4>أبحث عن</h4>
-              </div>
-              <div class="card-text mt-3 p-2">
-                <textarea name="lookingFor" [(ngModel)]="user.lookingFor" class="form-control border-white"></textarea>
-              </div>
-            </div>
-
-            <div class="card mt-4">
-              <div class="card-header">
-                <h4>هواياتي</h4>
-              </div>
-              <div class="card-text mt-3 p-2">
-                <textarea name="interests" [(ngModel)]="user.interests" class="form-control border-white"></textarea>
-              </div>
-            </div>
-            <div class="card mt-4">
-              <div class="card-header">
-                <h4>مكان الإقامة</h4>
-              </div>
-              <div class="card-text mt-3">
-                <div class="form-inline p-2">
-                  <label for="country">البلد</label>
-                  <input type="text" name="country" [(ngModel)]="user.country" class="ml-2 form-control">
-                  <label class="ml-4 " for="city">المدينة</label>
-                  <input type="text" name="city" [(ngModel)]="user.city" class="form-control ml-2">
+            <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser(user)">
+              <div class="card">
+                <div class="card-header">
+                  <h4>أعرفك بنفسي</h4>
+                </div>
+                <div class="card-text mt-3 p-2">
+                  <textarea name="introduction" [(ngModel)]="user.introduction"
+                    class="form-control border-white"></textarea>
                 </div>
               </div>
-            </div>
 
+
+              <div class="card mt-4">
+                <div class="card-header">
+                  <h4>أبحث عن</h4>
+                </div>
+                <div class="card-text mt-3 p-2">
+                  <textarea name="lookingFor" [(ngModel)]="user.lookingFor"
+                    class="form-control border-white"></textarea>
+                </div>
+              </div>
+
+              <div class="card mt-4">
+                <div class="card-header">
+                  <h4>هواياتي</h4>
+                </div>
+                <div class="card-text mt-3 p-2">
+                  <textarea name="interests" [(ngModel)]="user.interests" class="form-control border-white"></textarea>
+                </div>
+              </div>
+              <div class="card mt-4">
+                <div class="card-header">
+                  <h4>مكان الإقامة</h4>
+                </div>
+                <div class="card-text mt-3">
+                  <div class="form-inline p-2">
+                    <label for="country">البلد</label>
+                    <input type="text" name="country" [(ngModel)]="user.country" class="ml-2 form-control">
+                    <label class="ml-4 " for="city">المدينة</label>
+                    <input type="text" name="city" [(ngModel)]="user.city" class="form-control ml-2">
+                  </div>
+                </div>
+              </div>
+            </form>
 
           </tab>
 
