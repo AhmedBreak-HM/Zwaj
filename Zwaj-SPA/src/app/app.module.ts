@@ -30,6 +30,7 @@ import { MemberCardComponent } from './member/member-card/member-card.component'
 import { MemberDetailsComponent } from './member/member-details/member-details.component';
 import { MemberGalleryComponent } from './member/member-gallery/member-gallery.component';
 import { MemberEditComponent } from './member/member-edit/member-edit.component';
+import { PreventUnsavedChangesGuard } from './services/guards/prevent-unsaved-changes.guard';
 
 //  this code for ngx-gallery solve problem
 export class CustomHammerConfig extends HammerGestureConfig  {
@@ -86,6 +87,7 @@ export function tokenGetter() {
     ErrorInterceptorProvidor,
     // Guards
     AuthGuard,
+    PreventUnsavedChangesGuard,
 
 
     // Resolvers
