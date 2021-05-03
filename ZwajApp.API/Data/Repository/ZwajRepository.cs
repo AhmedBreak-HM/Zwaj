@@ -22,6 +22,11 @@ namespace ZwajApp.API.Data
         {
             _context.Remove(entity);
         }
+        public void Update<T>(T entity) where T : class
+        {
+            // _context.Update(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+        }
 
         public async Task<User> GetUser(int id)
         {
@@ -40,5 +45,6 @@ namespace ZwajApp.API.Data
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
     }
 }
