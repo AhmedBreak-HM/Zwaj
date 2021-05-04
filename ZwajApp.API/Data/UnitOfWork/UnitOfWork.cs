@@ -19,14 +19,14 @@ namespace Infrastructure.UnitOfWork
         {
             get
             {
-                // if (_entity is null)
-                // {
-                //     return _entity = new GenericRepository<T>(_context);
-                // }
-                // return _entity;
+                if (_entity is null)
+                {
+                    return _entity = new GenericRepository<T>(_context);
+                }
+                return _entity;
                 
                 // return _entity ??= new GenericRepository<T>(_context);
-                return _entity != null ? _entity : new GenericRepository<T>(_context);
+                // return _entity == null ? new GenericRepository<T>(_context) : _entity;
             }
         }
 

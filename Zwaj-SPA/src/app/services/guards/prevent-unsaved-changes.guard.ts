@@ -21,13 +21,13 @@ export class PreventUnsavedChangesGuard implements CanDeactivate<MemberEditCompo
       } else {
         this.x = false;
       }
-
-      return this.x;
+      // return true;
       // return this.alertify.confirm('IKNDKGNK', () => {
       //   return true;
       // })
-
     }
+    return true;
+
     // return false;
   }
   // OK(): boolean {
