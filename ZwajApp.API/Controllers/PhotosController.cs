@@ -49,7 +49,7 @@ namespace ZwajApp.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPhotoForUser(int userId, PhotoForCreateDto photoForCreateDto)
+        public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm] PhotoForCreateDto photoForCreateDto)
         {
             var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             if (userIdFromToken != userId) return Unauthorized();
@@ -63,6 +63,7 @@ namespace ZwajApp.API.Controllers
             {
                 photo.IsMain = true;
             }
+            photo.UserId = userId;
             _repo.Add<Photo>(photo);
             if (await _repo.SaveAll())
             {
