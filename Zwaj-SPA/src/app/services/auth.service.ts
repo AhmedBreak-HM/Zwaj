@@ -12,6 +12,7 @@ export class AuthService {
 
   jwtHelper = new JwtHelperService();
   baseUrl: string = environment.baseUrl + 'auth/';
+  decodedToken:any;
 
   constructor(private http: HttpClient) { }
 
