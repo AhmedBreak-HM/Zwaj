@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Bc1HdTTfgH1mpfDG0mrekx8yYhb401BBafS3lVB4Id+kbQYlglj5iyk08EvVoYOfjmHL5kim5q9VYrbQuUyWTg==",
+  "dgSpecHash": "dditJMQSQnOxGAHtAqUjMUW3zx/mHbOURimYxmoelQYMpdeDKKPshYMjiMV99eLBLB4+uy3S7Ycy6Aeol/yd2g==",
   "success": true,
-  "projectFilePath": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
+  "projectFilePath": "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\break\\.nuget\\packages\\automapper\\7.0.1\\automapper.7.0.1.nupkg.sha512",
     "C:\\Users\\break\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\4.0.1\\automapper.extensions.microsoft.dependencyinjection.4.0.1.nupkg.sha512",
+    "C:\\Users\\break\\.nuget\\packages\\cloudinarydotnet\\1.4.0\\cloudinarydotnet.1.4.0.nupkg.sha512",
     "C:\\Users\\break\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.6\\microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
     "C:\\Users\\break\\.nuget\\packages\\microsoft.aspnetcore\\2.1.1\\microsoft.aspnetcore.2.1.1.nupkg.sha512",
     "C:\\Users\\break\\.nuget\\packages\\microsoft.aspnetcore.antiforgery\\2.1.1\\microsoft.aspnetcore.antiforgery.2.1.1.nupkg.sha512",
@@ -291,7 +292,4 @@
     "C:\\Users\\break\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\break\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "C:\\Users\\break\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
-    "C:\\Users\\break\\.nuget\\packages\\system.xml.xpath.xdocument\\4.3.0\\system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
-  ],
-  "logs": []
-}
+    "C:\\Users\\break\\.nuget\\packages\

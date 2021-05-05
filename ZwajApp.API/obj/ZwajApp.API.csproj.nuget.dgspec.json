@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj": {}
+    "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj": {}
   },
   "projects": {
-    "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj": {
+    "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
+        "projectUniqueName": "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
         "projectName": "ZwajApp.API",
-        "projectPath": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
+        "projectPath": "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
         "packagesPath": "C:\\Users\\break\\.nuget\\packages\\",
-        "outputPath": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\obj\\",
+        "outputPath": "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\break\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -43,6 +43,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[4.0.1, )"
+            },
+            "CloudinaryDotNet": {
+              "target": "Package",
+              "version": "[1.4.0, )"
             },
             "Microsoft.AspNetCore.App": {
               "suppressParent": "All",
@@ -80,9 +84,4 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
-        }
-      }
-    }
-  }
-}
+          "runtimeId

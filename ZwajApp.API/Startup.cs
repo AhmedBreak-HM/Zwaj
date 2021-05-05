@@ -59,6 +59,8 @@ namespace ZwajApp.API
 
             // Add Zwaj Repo
             services.AddScoped<IZwajRepository, ZwajRepository>();
+            // add bind between Class CloudinarySettings and Settings Section CloudinarySettings
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 
             // add Authentication services
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
