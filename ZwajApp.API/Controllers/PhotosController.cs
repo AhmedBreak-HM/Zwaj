@@ -40,6 +40,14 @@ namespace ZwajApp.API.Controllers
 
         }
 
+        [HttpGet("{id}", Name = "GetPhoto")]
+        public async Task<IActionResult> GetPhoto(int id)
+        {
+            var photoFromRepo = await _repo.GetPhoto(id);
+            var photo = _mapper.Map<PhotoForReturnDto>(photoFromRepo);
+            return Ok(photo);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddPhotoForUser(int userId, PhotoForCreateDto photoForCreateDto)
         {
@@ -56,8 +64,12 @@ namespace ZwajApp.API.Controllers
                 photo.IsMain = true;
             }
             _repo.Add<Photo>(photo);
-            if (await _repo.SaveAll()) return Ok(photo + "  Don");
-            return BadRequest("  Error in Add Photo");
+            if (await _repo.SaveAll())
+            {
+                var photoForReturn = _mapper.Map<PhotoForReturnDto>(photo);
+                return CreatedAtRoute("GetPhoto", new { id = photo.Id }, photoForReturn);
+            }
+            return BadRequest(" Error in Add Photo");
         }
 
         private ImageUploadResult UploadPhotoToCloudinary(IFormFile file)
