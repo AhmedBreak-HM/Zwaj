@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vqPR+YfoGtt0ymeMHTdnE1wpYho3uUT3xstJueM726i3F/mhJHoPZHoRWAEVcJaynWTFRDR5RV3sCMe41z5JFQ==",
+  "dgSpecHash": "ff51Go/MjNf/C09KFy5siUCSe7J84is6s6Z74q9Fgnwedxbp03UJup0P4oUJZ51G6wOPayhgnltKto7Lw0L2kA==",
   "success": true,
-  "projectFilePath": "F:\\projctBreak\\projctes2020\\Zwaj\\zwajapp.api\\ZwajApp.API.csproj",
+  "projectFilePath": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\break\\.nuget\\packages\\automapper\\7.0.1\\automapper.7.0.1.nupkg.sha512",
     "C:\\Users\\break\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\4.0.1\\automapper.extensions.microsoft.dependencyinjection.4.0.1.nupkg.sha512",
@@ -294,22 +294,5 @@
     "C:\\Users\\break\\.nuget\\packages\\system.xml.xpath\\4.3.0\\system.xml.xpath.4.3.0.nupkg.sha512",
     "C:\\Users\\break\\.nuget\\packages\\system.xml.xpath.xdocument\\4.3.0\\system.xml.xpath.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file F:\\projctBreak\\projctes2020\\Zwaj\\zwajapp.api\\obj\\project.nuget.cache : Unterminated string. Expected delimiter: \". Path 'expectedPackageFiles[287]', line 295, position 40."
-    },
-    {
-      "code": "NU1603",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "CloudinaryDotNet 1.3.0 depends on Newtonsoft.Json (>= 11.0.0) but Newtonsoft.Json 11.0.0 was not found. An approximate best match of Newtonsoft.Json 11.0.1 was resolved.",
-      "libraryId": "Newtonsoft.Json",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.1"
-      ]
-    }
-  ]
+  "logs": []
 }

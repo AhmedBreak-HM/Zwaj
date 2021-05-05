@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\projctBreak\\projctes2020\\Zwaj\\zwajapp.api\\ZwajApp.API.csproj": {}
+    "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj": {}
   },
   "projects": {
-    "F:\\projctBreak\\projctes2020\\Zwaj\\zwajapp.api\\ZwajApp.API.csproj": {
+    "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\projctBreak\\projctes2020\\Zwaj\\zwajapp.api\\ZwajApp.API.csproj",
+        "projectUniqueName": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
         "projectName": "ZwajApp.API",
-        "projectPath": "F:\\projctBreak\\projctes2020\\Zwaj\\zwajapp.api\\ZwajApp.API.csproj",
+        "projectPath": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
         "packagesPath": "C:\\Users\\break\\.nuget\\packages\\",
-        "outputPath": "F:\\projctBreak\\projctes2020\\Zwaj\\zwajapp.api\\obj\\",
+        "outputPath": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\break\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -72,6 +72,10 @@
               "target": "Package",
               "version": "[2.1.0, )",
               "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[11.0.2, )"
             }
           },
           "imports": [
