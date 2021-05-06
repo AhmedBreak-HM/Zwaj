@@ -73,7 +73,35 @@ namespace ZwajApp.API.Controllers
             return BadRequest(" Error in Add Photo");
         }
 
-        private ImageUploadResult UploadPhotoToCloudinary(IFormFile file)
+        
+
+        [HttpPost("{id}/setMain")]
+        public async Task<IActionResult> SetIsMainPhoto(int userId, int id)
+        {
+            // should user id from token == user is from claim
+            var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (userIdFromToken != userId) return Unauthorized();
+
+            // should user photo id == id
+            var userFromRepo = await _repo.GetUser(userId);
+            if (!userFromRepo.Photos.Any(p => p.Id == id)) return Unauthorized();
+            // get desired Photo
+            var desiredMainPhoto = await _repo.GetPhoto(id);
+            if (desiredMainPhoto.IsMain) return BadRequest("this image is already is main");
+
+            // Current Photo
+            var currentPhoto = await _repo.GetPhotoByUser(userId);
+
+            // Update desired Photo && Current Photo
+            currentPhoto.IsMain = false;
+            desiredMainPhoto.IsMain = true;
+            if (await _repo.SaveAll()) return NoContent();
+
+            // if Error
+            return BadRequest("Cant Update this isMain image ");
+        }
+
+        private ImageUploadResult UploadPhotoToCloudinary(IFormFile file) 
         {
             var uploadResult = new ImageUploadResult();
             if (file != null && file.Length > 0)
