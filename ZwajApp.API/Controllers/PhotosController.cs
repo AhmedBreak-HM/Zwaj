@@ -48,7 +48,7 @@ namespace ZwajApp.API.Controllers
             return Ok(photo);
         }
 
-        // [HttpPost("AddPhotoForUser")]
+        [HttpPost("Create")]
         public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm] PhotoForCreateDto photoForCreateDto)
         {
             var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
