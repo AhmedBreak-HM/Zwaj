@@ -2,7 +2,9 @@
   <div class="col-sm-2 text-center" *ngFor="let photo of photos">
     <img src="{{photo.url}}" class="img-thumbnail" alt="">
     <div class="row text-center" style="margin-right:2px;margin-top:-3px;">
-      <button type="button" class="btn btn-sm btn-outline-success btn-down"><strong>أساسية</strong></button>
+      <button type="button"
+        [ngClass]="photo.isMain?'btn btn-sm btn-success btn-down':'btn btn-sm btn-outline-success btn-down'"
+        (click)="setPhotoIsMain(photo)"><strong>أساسية</strong></button>
       <button type="button" class="btn btn-sm btn-outline-danger btn-down"><i class="fa fa-trash-o"></i></button>
     </div>
 

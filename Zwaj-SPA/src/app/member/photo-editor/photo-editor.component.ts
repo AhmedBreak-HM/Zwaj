@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { Photo } from 'src/app/models/photo';
+import { AlertifyService } from 'src/app/services/alertify.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -13,13 +15,17 @@ export class PhotoEditorComponent implements OnInit {
   @Input() photos: Photo[]
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
-  baseUrl = environment.baseUrl;
+  baseUrl = environment.baseUrl + 'users';
+  userId: number;
 
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private alert: AlertifyService,
+    private userService: UserService) { }
 
   ngOnInit() {
+    this.userId = this.authService.decodedToken.nameid;
     this.initializeUploader();
+
   }
 
   fileOverBase(e: any): void {
@@ -29,7 +35,7 @@ export class PhotoEditorComponent implements OnInit {
   initializeUploader() {
     this.uploader = new FileUploader(
       {
-        url: this.baseUrl + 'users/' + this.authService.decodedToken.nameid + '/photos',
+        url: this.baseUrl + '/' + this.userId + '/photos',
         authToken: 'Bearer ' + localStorage.getItem('token'),
         isHTML5: true,
         allowedFileType: ['image'],
@@ -53,6 +59,12 @@ export class PhotoEditorComponent implements OnInit {
         this.photos.push(photo);
       }
     }
+  }
+
+  setPhotoIsMain(photo: Photo) {
+    this.userService.updateIsMainPhoto(this.userId, photo.id).subscribe(
+      () => this.alert.success('Photo is main don'),
+      (err) => this.alert.error(err));
   }
 
 }

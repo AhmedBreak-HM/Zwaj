@@ -48,7 +48,7 @@ namespace ZwajApp.API.Controllers
             return Ok(photo);
         }
 
-        [HttpPost]
+        // [HttpPost("AddPhotoForUser")]
         public async Task<IActionResult> AddPhotoForUser(int userId, [FromForm] PhotoForCreateDto photoForCreateDto)
         {
             var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
@@ -73,8 +73,8 @@ namespace ZwajApp.API.Controllers
             return BadRequest(" Error in Add Photo");
         }
 
-        
 
+        // [HttpGet("/products2/{id}", Name = "Products_List")]
         [HttpPost("{id}/setMain")]
         public async Task<IActionResult> SetIsMainPhoto(int userId, int id)
         {
@@ -101,7 +101,7 @@ namespace ZwajApp.API.Controllers
             return BadRequest("Cant Update this isMain image ");
         }
 
-        private ImageUploadResult UploadPhotoToCloudinary(IFormFile file) 
+        private ImageUploadResult UploadPhotoToCloudinary(IFormFile file)
         {
             var uploadResult = new ImageUploadResult();
             if (file != null && file.Length > 0)
