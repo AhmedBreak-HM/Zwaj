@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ff51Go/MjNf/C09KFy5siUCSe7J84is6s6Z74q9Fgnwedxbp03UJup0P4oUJZ51G6wOPayhgnltKto7Lw0L2kA==",
+  "dgSpecHash": "SFofCrw6hl250o/MRKu8qCmxlFUNbl8RTOzPV6X5UddWVFZ4ZuRU4Di7cn4dgY+xY1dIq1WASSuSiKDthCD7sA==",
   "success": true,
-  "projectFilePath": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
+  "projectFilePath": "F:\\projctBreak\\projctes2020\\Zwaj\\zwajapp.api\\ZwajApp.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\break\\.nuget\\packages\\automapper\\7.0.1\\automapper.7.0.1.nupkg.sha512",
     "C:\\Users\\break\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\4.0.1\\automapper.extensions.microsoft.dependencyinjection.4.0.1.nupkg.sha512",

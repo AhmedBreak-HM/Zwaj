@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { Photo } from 'src/app/models/photo';
 import { AlertifyService } from 'src/app/services/alertify.service';
@@ -19,6 +19,7 @@ export class PhotoEditorComponent implements OnInit {
   userId: number;
   currentMain: Photo;
 
+  @Output() sentUSerPhotoChange = new EventEmitter<Photo>();
 
 
   constructor(private authService: AuthService, private alert: AlertifyService,
@@ -37,7 +38,7 @@ export class PhotoEditorComponent implements OnInit {
   initializeUploader() {
     this.uploader = new FileUploader(
       {
-        url: this.baseUrl + '/' + this.userId + '/photos/Create',
+        url: this.baseUrl + '/' + this.userId + '/photos/CreatePhoto',
         authToken: 'Bearer ' + localStorage.getItem('token'),
         isHTML5: true,
         allowedFileType: ['image'],
@@ -70,6 +71,7 @@ export class PhotoEditorComponent implements OnInit {
         this.currentMain.isMain = false;
         photo.isMain = true;
         this.alert.success('Photo is main don');
+        this.sentUSerPhotoChange.emit(photo);
 
       },
       (err) => this.alert.error(err));
