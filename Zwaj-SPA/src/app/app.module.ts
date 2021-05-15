@@ -9,6 +9,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { JwtModule } from "@auth0/angular-jwt";
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
@@ -31,6 +32,7 @@ import { MemberDetailsComponent } from './member/member-details/member-details.c
 import { MemberGalleryComponent } from './member/member-gallery/member-gallery.component';
 import { MemberEditComponent } from './member/member-edit/member-edit.component';
 import { PreventUnsavedChangesGuard } from './services/guards/prevent-unsaved-changes.guard';
+import { PhotoEditorComponent } from './member/photo-editor/photo-editor.component';
 
 //  this code for ngx-gallery solve problem
 export class CustomHammerConfig extends HammerGestureConfig  {
@@ -56,7 +58,8 @@ export function tokenGetter() {
     MemberCardComponent,
     MemberDetailsComponent,
     MemberGalleryComponent,
-    MemberEditComponent
+    MemberEditComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ export function tokenGetter() {
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    FileUploadModule
 
   ],
   providers: [

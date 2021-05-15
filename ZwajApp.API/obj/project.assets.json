@@ -27,6 +27,18 @@
           "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
+      "CloudinaryDotNet/1.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/CloudinaryDotNet.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/CloudinaryDotNet.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -4548,6 +4560,23 @@
         "automapper.extensions.microsoft.dependencyinjection.4.0.1.nupkg.sha512",
         "automapper.extensions.microsoft.dependencyinjection.nuspec",
         "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+      ]
+    },
+    "CloudinaryDotNet/1.3.0": {
+      "sha512": "x1BOx2caJ3dIAkGQLsSMiGBwXl1aeMDI8DAiQD0NI9a0zv0+q/AtXYMMJxivEc5KZS8P1ImMHJLE6FyH85uVng==",
+      "type": "package",
+      "path": "cloudinarydotnet/1.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "cloudinarydotnet.1.3.0.nupkg.sha512",
+        "cloudinarydotnet.nuspec",
+        "lib/net40/CloudinaryDotNet.dll",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/netcore/CloudinaryDotNet.deps.json",
+        "lib/netcore/CloudinaryDotNet.dll",
+        "lib/netstandard1.3/CloudinaryDotNet.deps.json",
+        "lib/netstandard1.3/CloudinaryDotNet.dll"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -12296,11 +12325,13 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 4.0.1",
+      "CloudinaryDotNet >= 1.3.0",
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
       "Microsoft.EntityFrameworkCore.Design >= 2.1.2",
       "Microsoft.EntityFrameworkCore.Sqlite >= 2.1.2",
-      "Microsoft.NETCore.App >= 2.1.0"
+      "Microsoft.NETCore.App >= 2.1.0",
+      "Newtonsoft.Json >= 11.0.2"
     ]
   },
   "packageFolders": {
@@ -12309,11 +12340,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
+      "projectUniqueName": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
       "projectName": "ZwajApp.API",
-      "projectPath": "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
+      "projectPath": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\ZwajApp.API.csproj",
       "packagesPath": "C:\\Users\\break\\.nuget\\packages\\",
-      "outputPath": "f:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\obj\\",
+      "outputPath": "F:\\projctBreak\\projctes2020\\Zwaj\\ZwajApp.API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\break\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -12346,6 +12377,10 @@
             "target": "Package",
             "version": "[4.0.1, )"
           },
+          "CloudinaryDotNet": {
+            "target": "Package",
+            "version": "[1.3.0, )"
+          },
           "Microsoft.AspNetCore.App": {
             "suppressParent": "All",
             "target": "Package",
@@ -12370,6 +12405,10 @@
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[11.0.2, )"
           }
         },
         "imports": [

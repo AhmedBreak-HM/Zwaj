@@ -3,15 +3,16 @@
 font-family:ToyorAljanah;font-size:2.25rem;font-weight:bolder" class="navbar-brand" href="#"><i class="fa fa-heart"
       aria-hidden="true"></i>زواج<i class="fa fa-heart" aria-hidden="true"></i></a>
 
-  <ul *ngIf="loggedin()" style="letter-spacing:1px;font-weight:bold;font-family:'JF-Flat';font-size:1.2rem" class="navbar-nav mr-auto">
+  <ul *ngIf="loggedin()" style="letter-spacing:1px;font-weight:bold;font-family:'JF-Flat';font-size:1.2rem"
+    class="navbar-nav mr-auto">
     <li class="nav-item">
       <a class="nav-link" routerLink=''>الرئيسية </a>
     </li>
-    <li class="nav-item" routerLinkActive='active' >
+    <li class="nav-item" routerLinkActive='active'>
       <a class="nav-link" routerLink='/members'>بحث</a>
     </li>
     <li class="nav-item" routerLinkActive='active'>
-      <a class="nav-link" routerLink='/lists'  >تواصل</a>
+      <a class="nav-link" routerLink='/lists'>تواصل</a>
     </li>
     <li class="nav-item" routerLinkActive='active'>
       <a class="nav-link" routerLink='/messages'>دردشة</a>
@@ -25,13 +26,17 @@ font-family:ToyorAljanah;font-size:2.25rem;font-weight:bolder" class="navbar-bra
       {{user?.unique_name || userName|titlecase}}
     </a>
     <div *dropdownMenu class="dropdown-menu">
-      <a class="dropdown-item navv-link" [routerLink]="['/member/edit']"  ><i class="fa fa-user" aria-hidden="true"></i>
+      <a class="dropdown-item navv-link" [routerLink]="['/member/edit']"><i class="fa fa-user" aria-hidden="true"></i>
         ملف الشخصى</a>
       <div class="dropdown-divider"></div>
-      <a (click)="loggedOut()"  class="dropdown-item navv-link "><i class="fa fa-sign-out" aria-hidden="true"></i>
+      <a (click)="loggedOut()" class="dropdown-item navv-link "><i class="fa fa-sign-out" aria-hidden="true"></i>
         تسجيل الخروج</a>
     </div>
   </div>
+
+  <span *ngIf="loggedin()">
+    <img src="{{photoUrl}}" class="avatar">
+  </span>
 
   <form #Loginform="ngForm" class="ml-5 form-inline my-2 my-lg-0" (ngSubmit)="login()" *ngIf="!loggedin()">
     <input required name="username" class="form-control mr-sm-2" type="text" [(ngModel)]="model.username"

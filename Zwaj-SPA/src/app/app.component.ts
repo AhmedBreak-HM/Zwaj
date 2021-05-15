@@ -17,5 +17,13 @@ export class AppComponent {
     if (token) {
       this.authService.decodedToken = this.jwtHelper.decodeToken(token);
     }
+
+    const user = localStorage.getItem('user');
+    if (user) {
+      this.authService.curentUser = JSON.parse(user);
+      // send new photo url
+      this.authService.changeUserPhoto(this.authService.curentUser.photoURL);
+    }
+
   }
 }
