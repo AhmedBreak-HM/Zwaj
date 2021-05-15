@@ -67,11 +67,16 @@ export class PhotoEditorComponent implements OnInit {
   setPhotoIsMain(photo: Photo) {
     this.userService.updateIsMainPhoto(this.userId, photo.id).subscribe(
       res => {
-        this.currentMain = this.photos.filter(p => p.isMain === true)[0] ;
+        this.currentMain = this.photos.filter(p => p.isMain === true)[0];
         this.currentMain.isMain = false;
         photo.isMain = true;
         this.alert.success('Photo is main don');
         this.sentUSerPhotoChange.emit(photo);
+        // send new photo url
+        this.authService.changeUserPhoto(photo.url);
+        // modify user in localStorage
+        this.authService.curentUser.photoURL = photo.url;
+        localStorage.setItem('user', JSON.stringify(this.authService.curentUser));
 
       },
       (err) => this.alert.error(err));

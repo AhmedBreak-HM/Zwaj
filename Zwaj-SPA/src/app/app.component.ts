@@ -21,6 +21,8 @@ export class AppComponent {
     const user = localStorage.getItem('user');
     if (user) {
       this.authService.curentUser = JSON.parse(user);
+      // send new photo url
+      this.authService.changeUserPhoto(this.authService.curentUser.photoURL);
     }
 
   }

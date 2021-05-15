@@ -35,7 +35,7 @@ font-family:ToyorAljanah;font-size:2.25rem;font-weight:bolder" class="navbar-bra
   </div>
 
   <span *ngIf="loggedin()">
-    <img src="{{currentUser.photoURL}}" class="avatar">
+    <img src="{{photoUrl}}" class="avatar">
   </span>
 
   <form #Loginform="ngForm" class="ml-5 form-inline my-2 my-lg-0" (ngSubmit)="login()" *ngIf="!loggedin()">

@@ -14,6 +14,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MemberEditComponent implements OnInit {
   user$: Observable<User>;
+  photoUrl:string;
   @ViewChild('editForm', { static: false }) editForm: NgForm;
 
   @HostListener('window:beforeunload', ['$event'])
@@ -33,6 +34,7 @@ export class MemberEditComponent implements OnInit {
     // this.id = this.route.params['id'];
     this.id = <number>decodeUser.nameid;
     this.user$ = this.userService.getUser(this.id);
+    this.authService.currentPhotUrl.subscribe(res => this.photoUrl = res);
   }
   updateUser(user: User) {
 
