@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../models/user';
 import { AlertifyService } from '../services/alertify.service';
 import { AuthService } from '../services/auth.service';
 
@@ -13,10 +14,12 @@ export class NavComponent implements OnInit {
   model: any = {};
   user: any = {};
   userName: string = '';
+  currentUser:User;
   constructor(private authService: AuthService, private alert: AlertifyService, private router: Router) { }
 
   ngOnInit() {
     this.user = this.authService.DecodToken();
+    this.currentUser = this.authService.curentUser;
   }
   login() {
     this.authService.login(this.model).subscribe(
@@ -36,6 +39,11 @@ export class NavComponent implements OnInit {
   }
   loggedOut() {
     localStorage.removeItem('token');
+    this.authService.decodedToken = null;
+
+    localStorage.removeItem('user');
+    this.authService.curentUser = null;
+
     this.alert.warning('تم تسجيل الخروج');
     this.router.navigate(['']);
   }
