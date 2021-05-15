@@ -87,7 +87,7 @@ namespace ZwajApp.API.Controllers
             if (!userFromRepo.Photos.Any(p => p.Id == id)) return Unauthorized();
             // get desired Photo
             var desiredMainPhoto = await _repo.GetPhoto(id);
-            if (desiredMainPhoto.IsMain) return BadRequest("this image is already is main");
+            if (desiredMainPhoto.IsMain) return BadRequest("this image already is main");
 
             // Current Photo
             var currentPhoto = await _repo.GetPhotoByUser(userId);
@@ -118,6 +118,39 @@ namespace ZwajApp.API.Controllers
                 }
             }
             return uploadResult;
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePhoto(int userId, int id)
+        {
+
+            // should user id from token == user is from claim
+            var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (userIdFromToken != userId) return Unauthorized();
+
+            // should user photo id == id
+            var userFromRepo = await _repo.GetUser(userId);
+            if (!userFromRepo.Photos.Any(p => p.Id == id)) return Unauthorized();
+            // get desired Photo
+            var photo = await _repo.GetPhoto(id);
+            if (photo.IsMain) return BadRequest("this image already is main");
+
+            if (photo.CloudinaryId != null)
+            {
+                var deleteParams = new DeletionParams(photo.CloudinaryId);
+                var result = this._cloudinary.Destroy(deleteParams);
+                if (result.Result == "ok")
+                {
+                    _repo.Delete(photo);
+                }
+
+            }
+            else
+            {
+                _repo.Delete(photo);
+            }
+            if (await _repo.SaveAll()) return Ok("the photo is deleted");
+            return BadRequest("Error for photo delete");
         }
 
     }
