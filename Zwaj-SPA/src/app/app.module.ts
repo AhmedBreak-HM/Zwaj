@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { JwtModule } from "@auth0/angular-jwt";
@@ -76,6 +76,7 @@ export function tokenGetter() {
     }),
     // ---------------------------------------------------------
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
