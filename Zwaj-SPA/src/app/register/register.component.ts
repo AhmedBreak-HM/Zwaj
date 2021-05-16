@@ -14,15 +14,18 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
 
   // reactiveForms
-  registerForm: FormGroup = new FormGroup({
-    username: new FormControl('Mohamed', Validators.required),
-    password: new FormControl('',
-      [
-        Validators.required, Validators.minLength(4),
-        Validators.maxLength(8)
-      ]),
-    confirmPassword: new FormControl('', Validators.required)
-  });
+  registerForm: FormGroup = new FormGroup(
+    {
+      username: new FormControl('Mohamed', Validators.required),
+      password: new FormControl('',
+        [
+          Validators.required, Validators.minLength(4),
+          Validators.maxLength(8)
+        ]),
+      confirmPassword: new FormControl('', Validators.required)
+    }, this.passwordMatchValidator
+
+  );
 
   constructor(private authService: AuthService, private alert: AlertifyService) { }
 
@@ -47,6 +50,9 @@ export class RegisterComponent implements OnInit {
   cancel() {
     console.log(' not now ');
     this.cancelRegister.emit(false);
+  }
+  passwordMatchValidator(form: FormGroup) {
+    return form.get('password').value === form.get('confirmPassword').value ? null : { 'mismatch': true };
   }
 
 }
