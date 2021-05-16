@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   // reactiveForms
   registerForm: FormGroup = new FormGroup(
     {
-      username: new FormControl('Mohamed', Validators.required),
+      username: new FormControl('', Validators.required),
       password: new FormControl('',
         [
           Validators.required, Validators.minLength(4),
@@ -53,6 +53,16 @@ export class RegisterComponent implements OnInit {
   }
   passwordMatchValidator(form: FormGroup) {
     return form.get('password').value === form.get('confirmPassword').value ? null : { 'mismatch': true };
+  }
+
+  username() {
+    return this.registerForm.get('username');
+  }
+  password() {
+    return this.registerForm.get('password');
+  }
+  confirmPassword() {
+    return this.registerForm.get('confirmPassword');
   }
 
 }

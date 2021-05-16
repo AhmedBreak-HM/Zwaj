@@ -3,13 +3,29 @@
   <hr>
 
   <div class="form-group">
-    <input formControlName="username" type="text" class="form-control" placeholder="إسم المشترك">
+    <input formControlName="username" type="text" [ngClass]="{'is-invalid': username().invalid && username().touched}"
+      class="form-control" placeholder="إسم المشترك">
+    <div class="invalid-feedback">برجاءادخال الاسم</div>
   </div>
   <div class="form-group">
-    <input formControlName="password" type="password" class="form-control" placeholder="كلمة السر">
+    <input formControlName="password" type="password"
+      [ngClass]="{'is-invalid': password().invalid && password().touched}" class="form-control" placeholder="كلمة السر">
+    <div *ngIf="password().touched && password().errors?.required" class="invalid-feedback">برجاءادخال كلمة السر</div>
+    <div *ngIf="password().touched && password().errors?.minlength" class="invalid-feedback">يجب الا تقل كلمة السر عن
+      اربعة حقول</div>
+    <div *ngIf="password().touched && password().hasError('maxlength')" class="invalid-feedback">يجب الا تزيد كلمة السر
+      عن
+      ثمانى حقول</div>
+
   </div>
   <div class="form-group">
-    <input formControlName="confirmPassword" type="password" class="form-control" placeholder="تأكيد كلمةالسر">
+    <input formControlName="confirmPassword" type="password" class="form-control" placeholder="تأكيد كلمةالسر"
+      [ngClass]="{'is-invalid': confirmPassword().invalid && confirmPassword().touched ||confirmPassword().touched && registerForm.hasError('mismatch')}">
+    <div *ngIf="confirmPassword().touched && confirmPassword().errors?.required" class="invalid-feedback">ادخل كلمة السر
+      مره اخرى</div>
+    <div *ngIf="confirmPassword().touched && registerForm.hasError('mismatch')" class="invalid-feedback">كلمات المرور
+      غير متطابقة</div>
+
   </div>
   <div class="form-group text-center">
     <button [disabled]="registerForm.invalid" style="font-weight:bold;font-family:'JF-Flat';"
@@ -21,4 +37,3 @@
 </form>
 <p>form value : {{registerForm.value |json}}</p>
 <p>form status : {{registerForm.status }}</p>
-
