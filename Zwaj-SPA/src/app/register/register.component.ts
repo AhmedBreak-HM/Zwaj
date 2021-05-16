@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertifyService } from '../services/alertify.service';
 import { AuthService } from '../services/auth.service';
 
@@ -14,22 +14,40 @@ export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
 
   // reactiveForms
-  registerForm: FormGroup = new FormGroup(
-    {
-      username: new FormControl('', Validators.required),
-      password: new FormControl('',
-        [
-          Validators.required, Validators.minLength(4),
-          Validators.maxLength(8)
-        ]),
-      confirmPassword: new FormControl('', Validators.required)
-    }, this.passwordMatchValidator
+  registerForm: FormGroup;
+  // = new FormGroup(
+  //   {
+  //     username: new FormControl('', Validators.required),
+  //     password: new FormControl('',
+  //       [
+  //         Validators.required, Validators.minLength(4),
+  //         Validators.maxLength(8)
+  //       ]),
+  //     confirmPassword: new FormControl('', Validators.required)
+  //   }, this.passwordMatchValidator
+  // );
 
-  );
-
-  constructor(private authService: AuthService, private alert: AlertifyService) { }
+  constructor(private authService: AuthService, private alert: AlertifyService,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.registerForm = this.fb.group(
+      {
+        username: ['', Validators.required],
+        password: ['',
+          [
+            Validators.required, Validators.minLength(4),
+            Validators.maxLength(8)
+          ]
+        ],
+        confirmPassword: ['', Validators.required]
+
+
+      },
+      {
+        validator: this.passwordMatchValidator
+      }
+    );
   }
 
   register() {
