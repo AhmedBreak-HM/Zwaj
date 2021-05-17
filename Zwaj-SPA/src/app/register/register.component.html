@@ -3,10 +3,58 @@
   <hr>
 
   <div class="form-group">
+    <label class="control-label" style="margin-right:10px">أنا </label>
+    <label class="radio-inline ml-2 ">
+      <input class="mr-1" type="radio" value="رجل" formControlName="gender">
+      <label class="form-check-label">رجل</label>
+    </label>
+    <label class="radio-inline ml-3">
+      <input class="mr-1" type="radio" value="إمرأة" formControlName="gender">
+      <label class="form-check-label">إمرأة</label>
+
+    </label>
+  </div>
+
+
+  <div class="form-group">
     <input formControlName="username" type="text" [ngClass]="{'is-invalid': username().invalid && username().touched}"
       class="form-control" placeholder="إسم المشترك">
     <div class="invalid-feedback">برجاءادخال الاسم</div>
   </div>
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': registerForm.get('knownAs').errors && registerForm.get('knownAs').touched}"
+      class="form-control" placeholder="إسم الشهرة" formControlName="knownAs">
+    <div class="invalid-feedback"
+      *ngIf="registerForm.get('knownAs').touched && registerForm.get('knownAs').hasError('required')">أدخل إسم الشهرة
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': registerForm.get('dateOfBirth').errors && registerForm.get('dateOfBirth').touched}"
+      class="form-control" placeholder="تاريخ الميلاد" formControlName="dateOfBirth" type="date">
+    <div class="invalid-feedback"
+      *ngIf="registerForm.get('dateOfBirth').touched && registerForm.get('dateOfBirth').hasError('required')">أدخل تاريخ
+      ميلادك</div>
+  </div>
+
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': registerForm.get('city').errors && registerForm.get('city').touched}"
+      class="form-control" placeholder="المدينة" formControlName="city">
+    <div class="invalid-feedback"
+      *ngIf="registerForm.get('city').touched && registerForm.get('city').hasError('required')">أدخل إسم مدينتك</div>
+  </div>
+
+  <div class="form-group">
+    <input [ngClass]="{'is-invalid': registerForm.get('country').errors && registerForm.get('country').touched}"
+      class="form-control" placeholder="البلد" formControlName="country">
+    <div class="invalid-feedback"
+      *ngIf="registerForm.get('country').touched && registerForm.get('country').hasError('required')">أدخل إسم بلدك
+    </div>
+  </div>
+
+
   <div class="form-group">
     <input formControlName="password" type="password"
       [ngClass]="{'is-invalid': password().invalid && password().touched}" class="form-control" placeholder="كلمة السر">
@@ -35,5 +83,5 @@
   </div>
 
 </form>
-<p>form value : {{registerForm.value |json}}</p>
-<p>form status : {{registerForm.status }}</p>
+<!-- <p>form value : {{registerForm.value |json}}</p>
+<p>form status : {{registerForm.status }}</p> -->
