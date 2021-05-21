@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { JwtModule } from "@auth0/angular-jwt";
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { NgxGalleryModule } from 'ngx-gallery';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 
 import { AuthService } from './services/auth.service';
@@ -34,16 +34,6 @@ import { MemberEditComponent } from './member/member-edit/member-edit.component'
 import { PreventUnsavedChangesGuard } from './services/guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './member/photo-editor/photo-editor.component';
 
-//  this code for ngx-gallery solve problem
-export class CustomHammerConfig extends HammerGestureConfig  {
-  overrides = {
-      pinch: { enable: false },
-      rotate: { enable: false }
-  };
-}// this code for get token @auth0/angular-jwt send token with http header request
-export function tokenGetter() {
-  return localStorage.getItem('token');
-}
 
 
 @NgModule({
@@ -69,9 +59,12 @@ export function tokenGetter() {
     // https://github.com/auth0/angular2-jwt
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:5000'],
-        disallowedRoutes: ['localhost:5000/api/auth'],
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:5000'],
+
+        blacklistedRoutes: ['localhost:5000/api/auth'],
       },
     }),
     // ---------------------------------------------------------
@@ -85,9 +78,7 @@ export function tokenGetter() {
 
   ],
   providers: [
-    {
-      provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig
-  },
+
     // Globsl Http Interceptor
     ErrorInterceptorProvidor,
     // Guards
