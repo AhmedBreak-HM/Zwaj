@@ -60,6 +60,9 @@ export class PhotoEditorComponent implements OnInit {
           description: res.description
         };
         this.photos.push(photo);
+        if (photo.isMain) {
+          this.updatePhotoUrl(photo);
+        }
       }
     }
   }
@@ -72,18 +75,14 @@ export class PhotoEditorComponent implements OnInit {
         photo.isMain = true;
         this.alert.success('Photo is main don');
         this.sentUSerPhotoChange.emit(photo);
-        // send new photo url
-        this.authService.changeUserPhoto(photo.url);
-        // modify user in localStorage
-        this.authService.curentUser.photoURL = photo.url;
-        localStorage.setItem('user', JSON.stringify(this.authService.curentUser));
+        this.updatePhotoUrl(photo);
 
       },
       (err) => this.alert.error(err));
   }
   deletePhoto(id: number) {
     this.alert.confirm('are you sure to delet this photo', () => {
-      this.userService.deletePhoto(this.userId, id).subscribe(()=> {
+      this.userService.deletePhoto(this.userId, id).subscribe(() => {
         this.alert.success('Photo is deleted');
 
         // delete photo from photos arry
@@ -98,6 +97,13 @@ export class PhotoEditorComponent implements OnInit {
         this.photos.splice(index, 1);
       });
     });
+  }
+  updatePhotoUrl(photo: Photo) {
+    // send new photo url
+    this.authService.changeUserPhoto(photo.url);
+    // modify user in localStorage
+    this.authService.curentUser.photoURL = photo.url;
+    localStorage.setItem('user', JSON.stringify(this.authService.curentUser));
   }
 
 }

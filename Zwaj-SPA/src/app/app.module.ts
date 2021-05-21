@@ -1,14 +1,15 @@
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { JwtModule } from "@auth0/angular-jwt";
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { NgxGalleryModule } from 'ngx-gallery';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
 
 import { AuthService } from './services/auth.service';
@@ -34,16 +35,6 @@ import { MemberEditComponent } from './member/member-edit/member-edit.component'
 import { PreventUnsavedChangesGuard } from './services/guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './member/photo-editor/photo-editor.component';
 
-//  this code for ngx-gallery solve problem
-export class CustomHammerConfig extends HammerGestureConfig  {
-  overrides = {
-      pinch: { enable: false },
-      rotate: { enable: false }
-  };
-}// this code for get token @auth0/angular-jwt send token with http header request
-export function tokenGetter() {
-  return localStorage.getItem('token');
-}
 
 
 @NgModule({
@@ -64,29 +55,32 @@ export function tokenGetter() {
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     // @auth0/angular-jwt send token with http header request
     // https://github.com/auth0/angular2-jwt
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:5000'],
-        disallowedRoutes: ['localhost:5000/api/auth'],
+        tokenGetter: () => {
+          return localStorage.getItem('token');
+        },
+        whitelistedDomains: ['localhost:5000'],
+
+        blacklistedRoutes: ['localhost:5000/api/auth'],
       },
     }),
     // ---------------------------------------------------------
-    FormsModule,
-    BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
     NgxGalleryModule,
     FileUploadModule
 
   ],
   providers: [
-    {
-      provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig
-  },
+
     // Globsl Http Interceptor
     ErrorInterceptorProvidor,
     // Guards

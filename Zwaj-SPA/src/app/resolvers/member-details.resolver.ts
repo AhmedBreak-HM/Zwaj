@@ -7,7 +7,7 @@ import { User } from "../models/user";
 import { AlertifyService } from "../services/alertify.service";
 import { UserService } from "../services/user.service";
 
-Injectable()
+@Injectable()
 export class MemberDetailsResolver implements Resolve<User>{
 
   constructor(private userServices: UserService,
