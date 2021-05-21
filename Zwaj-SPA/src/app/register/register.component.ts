@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { AlertifyService } from '../services/alertify.service';
@@ -37,7 +38,9 @@ export class RegisterComponent implements OnInit {
   // );
 
   constructor(private authService: AuthService, private alert: AlertifyService,
-    private fb: FormBuilder,private localeService: BsLocaleService) { }
+    private fb: FormBuilder, private localeService: BsLocaleService,
+    private router: Router) { }
+
 
   ngOnInit() {
     this.registerForm = this.fb.group(
@@ -64,28 +67,39 @@ export class RegisterComponent implements OnInit {
     );
     // ngx-bootstrap/datepicker
     this.bsConfig = Object.assign({}, {
-       containerClass: 'theme-red' ,
-       showWeekNumbers: false
+      containerClass: 'theme-red',
+      showWeekNumbers: false
 
-      });
+    });
     this.localeService.use(this.locale);
   }
 
   register() {
-    console.log(this.registerForm.value);
-    // this.authService.register(this.model).subscribe(
-    //   () => {
-    //     this.alert.success('تم الاشتراك بنجاح');
-    //     console.log('register is succes')
-    //     this.cancelRegister.emit(false);
+    if (this.registerForm.valid) {
+      this.authService.register(this.registerForm.value).subscribe(
+        () => {
+          this.alert.success('تم الاشتراك بنجاح');
+          console.log('register is succes')
+          this.cancelRegister.emit(false);
+          this.model.username = this.username().value;
+          this.model.password = this.password().value;
+          console.log(this.model);
 
-    //   },
-    //   err => {
-    //     this.alert.error('register is error' + err);
-    //     console.log('register is error' + err)
-    //   }
-    // );
+        },
+        err => {
+          this.alert.error('register is error' + err);
+          console.log('register is error' + err)
+        }, () => {
+          this.authService.login(this.model).subscribe(() =>
+
+            this.router.navigate(['/members'])
+
+          );
+        }
+      );
+    }
   }
+
   cancel() {
     console.log(' not now ');
     this.cancelRegister.emit(false);
