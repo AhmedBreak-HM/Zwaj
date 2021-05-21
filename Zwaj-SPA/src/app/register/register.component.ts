@@ -1,8 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { AlertifyService } from '../services/alertify.service';
 import { AuthService } from '../services/auth.service';
 
+import { defineLocale } from 'ngx-bootstrap/chronos';
+import { arLocale } from 'ngx-bootstrap/locale';
+defineLocale('ar', arLocale);
+
+import { listLocales } from 'ngx-bootstrap/chronos';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,6 +19,9 @@ export class RegisterComponent implements OnInit {
   model: any = {};
   @Output() cancelRegister = new EventEmitter();
 
+  bsConfig: Partial<BsDatepickerConfig>;
+  locale = 'ar';
+  locales = listLocales();
   // reactiveForms
   registerForm: FormGroup;
   // = new FormGroup(
@@ -28,7 +37,7 @@ export class RegisterComponent implements OnInit {
   // );
 
   constructor(private authService: AuthService, private alert: AlertifyService,
-    private fb: FormBuilder) { }
+    private fb: FormBuilder,private localeService: BsLocaleService) { }
 
   ngOnInit() {
     this.registerForm = this.fb.group(
@@ -53,6 +62,13 @@ export class RegisterComponent implements OnInit {
         validator: this.passwordMatchValidator
       }
     );
+    // ngx-bootstrap/datepicker
+    this.bsConfig = Object.assign({}, {
+       containerClass: 'theme-red' ,
+       showWeekNumbers: false
+
+      });
+    this.localeService.use(this.locale);
   }
 
   register() {

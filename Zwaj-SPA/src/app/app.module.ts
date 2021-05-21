@@ -1,12 +1,13 @@
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { JwtModule } from "@auth0/angular-jwt";
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -54,6 +55,9 @@ import { PhotoEditorComponent } from './member/photo-editor/photo-editor.compone
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     // @auth0/angular-jwt send token with http header request
     // https://github.com/auth0/angular2-jwt
@@ -68,10 +72,8 @@ import { PhotoEditorComponent } from './member/photo-editor/photo-editor.compone
       },
     }),
     // ---------------------------------------------------------
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
     NgxGalleryModule,
     FileUploadModule
