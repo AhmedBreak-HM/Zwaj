@@ -12,6 +12,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MemberDetailsComponent implements OnInit {
   user: User;
+  ReadMoreIntro:boolean = true;
+  ReadMorelookFor:boolean = true;
+  ReadMoreInterests:boolean = true;
+  created:string;
+  age:string;
 
 
   constructor(private userService: UserService, private alert: AlertifyService,
@@ -22,6 +27,8 @@ export class MemberDetailsComponent implements OnInit {
       this.user = res['user'];
     });
     // this.loadUser();
+    this.created = new Date(this.user.created).toLocaleString('ar-EG', {weekday : 'long' , year :'numeric' , month : 'long',day:'numeric'}).replace('،','');
+    this.age = this.user.age.toLocaleString('ar-EG');
 
   }
 

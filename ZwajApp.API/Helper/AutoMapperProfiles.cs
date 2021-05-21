@@ -29,7 +29,7 @@ namespace ZwajApp.API.Helper
 
             CreateMap<UserForRegisterDto,User>();
             
-            CreateMap<User,UserForDetailsDto>();
+            // CreateMap<User,UserForDetailsDto>();
 
         }
     }
