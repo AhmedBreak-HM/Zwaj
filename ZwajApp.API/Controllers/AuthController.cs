@@ -35,9 +35,14 @@ namespace ZwajApp.API.Controllers
             // Validation
             userForRegisterDto.UserName = userForRegisterDto.UserName.ToLower();
             if (await _repo.UserExists(userForRegisterDto.UserName) == true) return BadRequest("هذا المستخدم موجود مسبقا");
-            var userToCreate = new User { Username = userForRegisterDto.UserName };
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
             var userCreated = await _repo.Register(userToCreate, userForRegisterDto.PassWord);
-            return StatusCode(201);
+            var userToReturn = _mapper.Map<UserForDetailsDto>(userCreated);
+            return CreatedAtRoute(
+                "GetUser",
+                new { controller = "Users", id = userCreated.Id },
+                userToReturn
+                );
         }
 
         [HttpPost("login")]
