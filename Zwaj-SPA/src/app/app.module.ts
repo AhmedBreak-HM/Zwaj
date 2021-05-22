@@ -34,7 +34,7 @@ import { MemberGalleryComponent } from './member/member-gallery/member-gallery.c
 import { MemberEditComponent } from './member/member-edit/member-edit.component';
 import { PreventUnsavedChangesGuard } from './services/guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './member/photo-editor/photo-editor.component';
-
+import { TimeAgoPipe } from 'time-ago-pipe';
 
 
 @NgModule({
@@ -50,7 +50,8 @@ import { PhotoEditorComponent } from './member/photo-editor/photo-editor.compone
     MemberDetailsComponent,
     MemberGalleryComponent,
     MemberEditComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,

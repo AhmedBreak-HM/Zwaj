@@ -62,6 +62,9 @@ namespace ZwajApp.API
             // add bind between Class CloudinarySettings and Settings Section CloudinarySettings
             services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
 
+            // Add Action Filter Services LogUseActivity To save laste Active
+            services.AddScoped<LogUseActivity>();
+
             // add Authentication services
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
             {

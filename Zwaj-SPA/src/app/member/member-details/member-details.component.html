@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-4 mt-3">
       <div class="card">
-        <img class="card-img-top img-thumbnail" src="{{user.photoURL || 'assets/img/defaultImg.png'}}" alt="{{user.knownAs}}">
+        <img class="card-img-top img-thumbnail" src="{{user.photoURL }}" alt="{{user.knownAs}}">
         <div class="card-body">
           <div>
             <strong>مكان الإقامة </strong>
@@ -10,15 +10,15 @@
           </div>
           <div>
             <strong>العمر </strong>
-            <p>{{user.age}}</p>
+            <p>{{age}}</p>
           </div>
           <div>
             <strong>آخر ظهور </strong>
-            <p>{{user.lastActive}}</p>
+            <p>{{user.lastActive |timeAgo}}</p>
           </div>
           <div>
             <strong>مشترك منذ </strong>
-            <p>{{user.created}}</p>
+            <p>{{created}}</p>
           </div>
         </div>
         <div class="card-footer">
@@ -35,11 +35,15 @@
           <tab heading="أنا {{user?.knownAs}}">
             <div class="card">
               <div class="card-header">
-                <h4 >أعرفك بنفسي</h4>
+                <h4>أعرفك بنفسي</h4>
               </div>
               <div class="card-text mt-3 p-2">
-                <p>{{user.introduction}}</p>
+                <p #intro>{{user.introduction |slice:0:200}}</p>
               </div>
+              <button [hidden]="!ReadMoreIntro" type="button" class="btn btn-primary"
+                (click)="intro.innerText = user.introduction;ReadMoreIntro = false">اقرا المزيد</button>
+              <button [hidden]="ReadMoreIntro" type="button" class="btn btn-danger"
+                (click)="intro.innerText = user.introduction.slice(0,200);ReadMoreIntro = true">أقل </button>
             </div>
 
             <div class="card mt-4">
@@ -47,8 +51,12 @@
                 <h4>أبحث عن</h4>
               </div>
               <div class="card-text mt-3 p-2">
-                <p>{{user.lookingFor}}</p>
+                <p #lookFor>{{user.lookingFor|slice:0:200}}</p>
               </div>
+              <button [hidden]="!ReadMorelookFor" type="button" class="btn btn-primary"
+                (click)="lookFor.innerText = user.lookingFor; ReadMorelookFor=false">اقرا المزيد</button>
+              <button [hidden]="ReadMorelookFor" type="button" class="btn btn-danger"
+                (click)="lookFor.innerText = user.lookingFor.slice(0,200); ReadMorelookFor=true">اقل</button>
             </div>
 
 
@@ -62,8 +70,12 @@
                 <h4 class="pb-3">هواياتي</h4>
               </div>
               <div class="card-text mt-3 p-2">
-                <p>{{user.interests}}</p>
+                <p #interests>{{user.interests |slice:0:200}}</p>
               </div>
+              <button [hidden]="!ReadMoreInterests" type="button" class="btn btn-primary"
+                (click)="ReadMoreInterests=false;  interests.innerText = user.interests">اقرا المزيد</button>
+              <button [hidden]="ReadMoreInterests" type="button" class="btn btn-danger"
+                (click)="ReadMoreInterests=true;  interests.innerText = user.interests.slice(0,200)">اقل</button>
             </div>
           </tab>
 
