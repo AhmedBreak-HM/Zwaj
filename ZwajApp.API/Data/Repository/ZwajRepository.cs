@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ZwajApp.API.Helper;
 using ZwajApp.API.Models;
 
 namespace ZwajApp.API.Data
@@ -36,10 +37,10 @@ namespace ZwajApp.API.Data
 
         }
 
-        public async Task<IEnumerable<User>> GetUsers()
+        public async Task<PagedList<User>> GetUsers(PagenationParams pagenationParams)
         {
-            var users = await _context.Users.Include(x => x.Photos).ToListAsync();
-            return users;
+            var users = _context.Users.Include(x => x.Photos);
+            return await PagedList<User>.CreateAsync(users, pagenationParams.PageNumber, pagenationParams.PageSize);
         }
 
         public async Task<bool> SaveAll()

@@ -26,14 +26,15 @@ namespace ZwajApp.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetUsers( [FromQuery]PagenationParams pagenationParams)
         {
-            var users = await _repo.GetUsers();
+            var users = await _repo.GetUsers(pagenationParams);
+            Response.AddApplicationPagenation(users.CurrentPage, users.PageSize, users.TotalCount, users.TotlePages);
             var UsersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
             return Ok(UsersToReturn);
 
         }
-        [HttpGet("{id}",Name="GetUser")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
             var user = await _repo.GetUser(id);

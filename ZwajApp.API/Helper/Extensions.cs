@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace ZwajApp.API.Helper
 {
@@ -17,7 +18,9 @@ namespace ZwajApp.API.Helper
         public static void AddApplicationPagenation(this HttpResponse response, int currentPage, int itemPerPage, int totalItems, int totalPages)
         {
             var paginationHeader = new PagenationHeader(currentPage, itemPerPage, totalItems, totalPages);
-            response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationHeader));
+            var camlcaseFormatter = new JsonSerializerSettings();
+            camlcaseFormatter.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationHeader,camlcaseFormatter));
             response.Headers.Add("Access-Control-Expose-Headers", "Pagination");
         }
 
