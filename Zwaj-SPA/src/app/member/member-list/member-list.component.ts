@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Pagenation } from 'src/app/models/Pagenation';
 import { User } from '../../models/user';
 import { AlertifyService } from '../../services/alertify.service';
 import { UserService } from '../../services/user.service';
@@ -11,19 +12,21 @@ import { UserService } from '../../services/user.service';
 })
 export class MemberListComponent implements OnInit {
 
-  // users: User[] =[];
-  users: Observable<User[]>;
+  users: User[] =[];
+  pagination:Pagenation;
+  // users: Observable<User[]>;
 
   constructor(private userService: UserService, private alert: AlertifyService) { }
 
   ngOnInit() {
-    // this.loadUsers();
-    this.users = this.userService.getUsers();
+    this.loadUsers();
+    // this.users = this.userService.getUsers();
   }
-  // loadUsers(){
-  //   this.userService.getUsers().subscribe(res => {
-  //     this.users = res;
-  //   },err => this.alert.error(err));
-  // }
+  loadUsers(){
+    this.userService.getUsers(2,5).subscribe(res => {
+      this.users = res.result;
+      this.pagination = res.pagenation;
+    },err => this.alert.error(err));
+  }
 
 }

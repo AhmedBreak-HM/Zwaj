@@ -1,7 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { PagenationResult } from '../models/PagenationResult';
 import { User } from '../models/user';
 
 // now use auth0 to send token
@@ -21,8 +23,21 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.baseURl);
+  getUsers(currentPage?: number, itemsPerPage?: number): Observable<PagenationResult<User[]>> {
+    const pagenationResulr = new PagenationResult<User[]>();
+    let params = new HttpParams;
+    if (currentPage >0 && itemsPerPage >0) {
+      params = params.append('pageNumber', currentPage.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
+    }
+    return this.http.get<User[]>(this.baseURl, { observe: 'response', params }).pipe(
+      map(res => {
+
+        pagenationResulr.result = res.body;
+        pagenationResulr.pagenation = JSON.parse(res.headers.get('Pagination'));
+        return pagenationResulr;
+      })
+    );
   }
 
   getUser(id: number): Observable<User> {
