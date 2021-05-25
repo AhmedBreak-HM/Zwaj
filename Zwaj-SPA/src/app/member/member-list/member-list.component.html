@@ -5,8 +5,18 @@
     </div>
   </div>
 </div>
+ <div *ngIf="users.length" class="d-flex justify-content-center" >
+  <pagination [(ngModel)]="pagination.currentPage" [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage" [boundaryLinks]="true"
+    (pageChanged)="pageChanged($event)"></pagination>
+ </div>
+ <!-- <div *ngIf="users.length" class="d-flex justify-content-center" >
+ <pagination [boundaryLinks]="true" [itemsPerPage]="pagination.itemsPerPage" [totalItems]="pagination.totalItems"
+ [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event);" previousText="&lsaquo;" nextText="&rsaquo;"
+ firstText="&laquo;" lastText="&raquo;">
 
-
+</pagination>
+</div> -->
   <!-- <div class="row">
     <div *ngFor="let item of users |async" class="col-lg-2 col-md-3 col-sm-6">
         <app-member-card [user]='item'></app-member-card>

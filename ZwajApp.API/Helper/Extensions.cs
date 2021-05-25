@@ -15,9 +15,9 @@ namespace ZwajApp.API.Helper
             response.Headers.Add("Access-Control-Allow-Origin", "*");
         }
         // add header for http to show Pagination information with respone
-        public static void AddApplicationPagenation(this HttpResponse response, int currentPage, int itemPerPage, int totalItems, int totalPages)
+        public static void AddApplicationPagenation(this HttpResponse response, int currentPage, int itemsPerPage, int totalItems, int totalPages)
         {
-            var paginationHeader = new PagenationHeader(currentPage, itemPerPage, totalItems, totalPages);
+            var paginationHeader = new PagenationHeader(currentPage, itemsPerPage, totalItems, totalPages);
             var camlcaseFormatter = new JsonSerializerSettings();
             camlcaseFormatter.ContractResolver = new CamelCasePropertyNamesContractResolver();
             response.Headers.Add("Pagination", JsonConvert.SerializeObject(paginationHeader,camlcaseFormatter));

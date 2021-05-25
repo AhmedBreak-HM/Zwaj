@@ -12,21 +12,31 @@ import { UserService } from '../../services/user.service';
 })
 export class MemberListComponent implements OnInit {
 
-  users: User[] =[];
-  pagination:Pagenation;
+  users: User[] = [];
+  pagination: Pagenation;
   // users: Observable<User[]>;
 
   constructor(private userService: UserService, private alert: AlertifyService) { }
 
   ngOnInit() {
     this.loadUsers();
+    console.log('data from load')
+
     // this.users = this.userService.getUsers();
   }
-  loadUsers(){
-    this.userService.getUsers(2,5).subscribe(res => {
+  loadUsers(pageNumber?: number, itemsPerPage?: number) {
+    this.userService.getUsers(pageNumber, itemsPerPage).subscribe(res => {
       this.users = res.result;
       this.pagination = res.pagenation;
-    },err => this.alert.error(err));
+      console.log(this.pagination)
+
+    }, err => this.alert.error(err));
+  }
+  pageChanged(event: any): void {
+    this.loadUsers(this.pagination.currentPage,this.pagination.itemsPerPage);
+    // this.loadUsers(this.pagination.currentPage,5);
+
+
   }
 
 }
