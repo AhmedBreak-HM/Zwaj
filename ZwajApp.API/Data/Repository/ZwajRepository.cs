@@ -39,7 +39,12 @@ namespace ZwajApp.API.Data
 
         public async Task<PagedList<User>> GetUsers(PagenationParams pagenationParams)
         {
-            var users = _context.Users.Include(x => x.Photos);
+
+            // IQueryable<User> users = _context.Users.Include(x => x.Photos);
+            var users = _context.Users.Include(x => x.Photos).AsQueryable();
+            users = users.Where(u => u.Id != pagenationParams.UserId)
+                         .Where(u => u.Gender == pagenationParams.Gender);
+
             return await PagedList<User>.CreateAsync(users, pagenationParams.PageNumber, pagenationParams.PageSize);
         }
 

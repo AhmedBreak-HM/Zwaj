@@ -26,8 +26,15 @@ namespace ZwajApp.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers( [FromQuery]PagenationParams pagenationParams)
+        public async Task<IActionResult> GetUsers([FromQuery] PagenationParams pagenationParams)
         {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            var userFromRepo = await _repo.GetUser(userId);
+            pagenationParams.UserId = userId;
+            if (string.IsNullOrEmpty(pagenationParams.Gender))
+            {
+                pagenationParams.Gender = userFromRepo.Gender == "رجل" ? "إمرأة" : "رجل";
+            }
             var users = await _repo.GetUsers(pagenationParams);
             Response.AddApplicationPagenation(users.CurrentPage, users.PageSize, users.TotalCount, users.TotlePages);
             var UsersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
