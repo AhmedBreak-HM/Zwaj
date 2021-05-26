@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,6 +45,14 @@ namespace ZwajApp.API.Data
             var users = _context.Users.Include(x => x.Photos).AsQueryable();
             users = users.Where(u => u.Id != pagenationParams.UserId)
                          .Where(u => u.Gender == pagenationParams.Gender);
+            //  Filter by age
+            if (pagenationParams.MinAge != 18 || pagenationParams.MaxAge != 99)
+            {
+                // convert maxAge && minAge to DateTime 
+                var minDate = DateTime.Today.AddYears(-pagenationParams.MaxAge - 1);
+                var maxDate = DateTime.Today.AddYears(-pagenationParams.MinAge);
+                users = users.Where(u => u.DateOfBirth >= minDate && u.DateOfBirth <= maxDate);
+            }
 
             return await PagedList<User>.CreateAsync(users, pagenationParams.PageNumber, pagenationParams.PageSize);
         }
