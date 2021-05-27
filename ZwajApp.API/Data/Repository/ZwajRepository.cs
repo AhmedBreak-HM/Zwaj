@@ -42,7 +42,7 @@ namespace ZwajApp.API.Data
         {
 
             // IQueryable<User> users = _context.Users.Include(x => x.Photos);
-            var users = _context.Users.Include(x => x.Photos).AsQueryable();
+            var users = _context.Users.Include(x => x.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
             users = users.Where(u => u.Id != pagenationParams.UserId)
                          .Where(u => u.Gender == pagenationParams.Gender);
             //  Filter by age
@@ -52,6 +52,22 @@ namespace ZwajApp.API.Data
                 var minDate = DateTime.Today.AddYears(-pagenationParams.MaxAge - 1);
                 var maxDate = DateTime.Today.AddYears(-pagenationParams.MinAge);
                 users = users.Where(u => u.DateOfBirth >= minDate && u.DateOfBirth <= maxDate);
+            }
+
+            // FilterBy LastActive or Created
+            if (!string.IsNullOrEmpty(pagenationParams.OrederBy))
+            {
+                switch (pagenationParams.OrederBy)
+                {
+                    case "created":
+                        users = users.OrderByDescending(u => u.Created);
+                        break;
+
+                    default:
+                        users = users.OrderByDescending(u => u.LastActive);
+                        break;
+                }
+
             }
 
             return await PagedList<User>.CreateAsync(users, pagenationParams.PageNumber, pagenationParams.PageSize);
