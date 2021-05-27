@@ -3,6 +3,7 @@ export class UserParams {
   public gender: string;
   public minAge: number;
   public maxAge: number;
+  public orederBy: string;
 
 
 

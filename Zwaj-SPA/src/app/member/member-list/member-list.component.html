@@ -2,8 +2,10 @@
   <h4 style="font-family:'Droid-Arabic-Kufi'"> يوجد {{pagination?.totalItems}} إقتراحات </h4>
 </div>
 
-<div class="rtl container mt-3" >
-  <form dir="rtl" form="ngForm" (ngSubmit)="search=false;loadUsers(pagination.currentPage,pagination.itemsPerPage,userParams);" class="form-inline" novalidate>
+<div class="rtl container mt-3">
+  <form dir="rtl" form="ngForm"
+    (ngSubmit)="search=false;loadUsers(pagination.currentPage,pagination.itemsPerPage,userParams);" class="form-inline"
+    novalidate>
     <div class="form-group">
       <label for="minAge">العمر الأدنى </label>
       <input type="number" [(ngModel)]="userParams.minAge" class="form-control ml-1" style="width: 70px" id="minAge"
@@ -27,6 +29,22 @@
     <button type="submit" style="font-family:'JF-FLAT'" class="btn btn-dark btn-small ml-2 mr-2">بحث</button>
     <button type="button" style="font-family:'JF-FLAT'" (click)="search=false;resetFilter();"
       class="btn btn-dark btn-small ml-2 mr-2">إستعادة</button>
+
+    <div class="col">
+      <div class="btn-group-vertical float-left">
+        <button type="button" [(ngModel)]="userParams.orederBy"
+         (click)="loadUsers(pagination.currentPage,pagination.itemsPerPage,userParams)"
+         btnRadio="lastActive"
+          name="orederBy" class="btn mb-1 ajs-button btn-up"
+          [ngStyle]="{'background':userParams.orederBy==='lastActive'?'red' : ''}">الأحدث ظهوراً</button>
+
+        <button type="button" [(ngModel)]="userParams.orederBy"
+         (click)="loadUsers(pagination.currentPage,pagination.itemsPerPage,userParams)"
+          btnRadio="created"
+          name="orederBy" class="btn ajs-button btn-down"
+          [ngStyle]="{'background':userParams.orederBy==='created'?'red' : ''}">الأحدث إشتراكاً</button>
+      </div>
+    </div>
 
   </form>
   <br>

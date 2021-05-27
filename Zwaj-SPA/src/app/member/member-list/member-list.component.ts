@@ -19,7 +19,8 @@ export class MemberListComponent implements OnInit {
   userParams: UserParams = {
     gender: this.user.gender === 'رجل' ? 'إمرأة' : 'رجل',
     minAge: 18,
-    maxAge: 99
+    maxAge: 99,
+    orederBy:'lastActive'
   };
 
   constructor(private userService: UserService, private alert: AlertifyService) { }
