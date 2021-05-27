@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { PagenationResult } from '../models/PagenationResult';
 import { User } from '../models/user';
+import { UserParams } from '../models/UserParams';
 
 // now use auth0 to send token
 // const httpOption ={
@@ -23,12 +24,18 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(currentPage?: number, itemsPerPage?: number): Observable<PagenationResult<User[]>> {
+  getUsers(currentPage?: number, itemsPerPage?: number,userParams?:UserParams): Observable<PagenationResult<User[]>> {
     const pagenationResulr = new PagenationResult<User[]>();
     let params = new HttpParams;
-    if (currentPage >0 && itemsPerPage >0) {
+    if (currentPage > 0 && itemsPerPage > 0) {
       params = params.append('pageNumber', currentPage.toString());
       params = params.append('pageSize', itemsPerPage.toString());
+    }
+    if (userParams !=null) {
+      params = params.append('gender', userParams.gender);
+      params = params.append('minAge', userParams.minAge.toString());
+      params = params.append('maxAge', userParams.maxAge.toString());
+
     }
     return this.http.get<User[]>(this.baseURl, { observe: 'response', params }).pipe(
       map(res => {
