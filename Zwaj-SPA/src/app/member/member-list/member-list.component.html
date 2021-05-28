@@ -1,5 +1,8 @@
-<div class="text-center mt-3">
-  <h4 style="font-family:'Droid-Arabic-Kufi'"> يوجد {{pagination?.totalItems}} إقتراحات </h4>
+<div class="text-center mt-3" *ngIf="users.length">
+  <h4 style="font-family:'Droid-Arabic-Kufi'"> يوجد {{pagination?.totalItems}} إقتراح </h4>
+</div>
+<div class="text-center mt-3" *ngIf="!users.length">
+  <h4 style="font-family:'Droid-Arabic-Kufi'"> لا توجد {{pagination?.totalItems}} اقتراحات مناسبة </h4>
 </div>
 
 <div class="rtl container mt-3">
