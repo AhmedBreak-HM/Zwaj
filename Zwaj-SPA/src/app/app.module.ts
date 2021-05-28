@@ -10,6 +10,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+
 import { FileUploadModule } from 'ng2-file-upload';
 
 import { AuthService } from './services/auth.service';
@@ -77,6 +80,8 @@ import { TimeAgoPipe } from 'time-ago-pipe';
     BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
     NgxGalleryModule,
+    PaginationModule.forRoot(),
+    ButtonsModule,
     FileUploadModule
 
   ],

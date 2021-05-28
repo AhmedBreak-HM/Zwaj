@@ -16,6 +16,19 @@ namespace ZwajApp.API.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.14-servicing-32113");
 
+            modelBuilder.Entity("ZwajApp.API.Models.Like", b =>
+                {
+                    b.Property<int>("LikerId");
+
+                    b.Property<int>("LikeeId");
+
+                    b.HasKey("LikerId", "LikeeId");
+
+                    b.HasIndex("LikeeId");
+
+                    b.ToTable("likes");
+                });
+
             modelBuilder.Entity("ZwajApp.API.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
@@ -86,6 +99,19 @@ namespace ZwajApp.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("values");
+                });
+
+            modelBuilder.Entity("ZwajApp.API.Models.Like", b =>
+                {
+                    b.HasOne("ZwajApp.API.Models.User", "Likee")
+                        .WithMany("likers")
+                        .HasForeignKey("LikeeId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("ZwajApp.API.Models.User", "Liker")
+                        .WithMany("likees")
+                        .HasForeignKey("LikerId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("ZwajApp.API.Models.Photo", b =>
