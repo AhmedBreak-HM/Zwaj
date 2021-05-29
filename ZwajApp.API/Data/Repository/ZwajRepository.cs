@@ -89,5 +89,11 @@ namespace ZwajApp.API.Data
             return await _context.Photos.Where(u => u.UserId == UserId)
                                         .FirstOrDefaultAsync(p => p.IsMain);
         }
+
+        public async Task<Like> GetLike(int userId, int recipientId)
+        {
+            return await _context.likes
+                                 .FirstOrDefaultAsync(l => l.LikerId == userId && l.LikeeId == recipientId);
+        }
     }
 }
