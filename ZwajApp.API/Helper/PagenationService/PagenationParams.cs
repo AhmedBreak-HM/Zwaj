@@ -20,6 +20,9 @@ namespace ZwajApp.API.Helper
 
         public string OrederBy { get; set; }
 
+        public bool likees { get; set; }
+        public bool likers { get; set; }
+
 
     }
 }
