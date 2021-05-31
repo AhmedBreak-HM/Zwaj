@@ -87,20 +87,6 @@ namespace ZwajApp.API.Data
             return await PagedList<User>.CreateAsync(users, pagenationParams.PageNumber, pagenationParams.PageSize);
         }
 
-        private async Task<IEnumerable<int>> GetUserLikess(int id, bool likers)
-        {
-            var user = await _context.Users.Include(u => u.likers).Include(u => u.likees)
-                                     .FirstOrDefaultAsync(u => u.Id == id);
-            if (likers)
-            {
-                return user.likers.Where(l => l.LikeeId == id).Select(l => l.LikerId);
-            }
-            else
-            {
-                return user.likers.Where(l => l.LikerId == id).Select(l => l.LikeeId);
-            }
-
-        }
 
         private async Task<IEnumerable<int>> GetUserLikes(int id, bool Likers)
         {
