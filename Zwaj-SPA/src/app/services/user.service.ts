@@ -24,7 +24,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(currentPage?: number, itemsPerPage?: number, userParams?: UserParams): Observable<PagenationResult<User[]>> {
+  getUsers(currentPage?: number, itemsPerPage?: number, userParams?: UserParams, likeParam?: string): Observable<PagenationResult<User[]>> {
     const pagenationResulr = new PagenationResult<User[]>();
     let params = new HttpParams;
     if (currentPage > 0 && itemsPerPage > 0) {
@@ -37,6 +37,13 @@ export class UserService {
       params = params.append('maxAge', userParams.maxAge.toString());
       params = params.append('orederBy', userParams.orederBy);
 
+    }
+    if (likeParam === 'likers') {
+      params = params.append('likers', 'true');
+    }
+
+    if (likeParam === 'likees') {
+      params = params.append('likees', 'true');
     }
     return this.http.get<User[]>(this.baseURl, { observe: 'response', params }).pipe(
       map(res => {
