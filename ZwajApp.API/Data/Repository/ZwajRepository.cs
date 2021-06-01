@@ -45,6 +45,20 @@ namespace ZwajApp.API.Data
             var users = _context.Users.Include(x => x.Photos).OrderByDescending(u => u.LastActive).AsQueryable();
             users = users.Where(u => u.Id != pagenationParams.UserId)
                          .Where(u => u.Gender == pagenationParams.Gender);
+            // Filter by Likers
+
+            if (pagenationParams.likers)
+            {
+                var userLikers = await GetUserLikes(pagenationParams.UserId, pagenationParams.likers);
+                users = users.Where(u => userLikers.Contains(u.Id));
+            }
+            // Filter by Likees
+
+            if (pagenationParams.likees)
+            {
+                var userLikees = await GetUserLikes(pagenationParams.UserId, pagenationParams.likers);
+                users = users.Where(u => userLikees.Contains(u.Id));
+            }
             //  Filter by age
             if (pagenationParams.MinAge != 18 || pagenationParams.MaxAge != 99)
             {
@@ -73,6 +87,21 @@ namespace ZwajApp.API.Data
             return await PagedList<User>.CreateAsync(users, pagenationParams.PageNumber, pagenationParams.PageSize);
         }
 
+
+        private async Task<IEnumerable<int>> GetUserLikes(int id, bool Likers)
+        {
+            var user = await _context.Users.Include(u => u.likers).Include(u => u.likees)
+                                     .FirstOrDefaultAsync(u => u.Id == id);
+            if (Likers)
+            {
+                return user.likers.Where(u => u.LikeeId == id).Select(l => l.LikerId);
+            }
+            else
+            {
+                return user.likees.Where(u => u.LikerId == id).Select(l => l.LikeeId);
+            }
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
@@ -88,6 +117,12 @@ namespace ZwajApp.API.Data
         {
             return await _context.Photos.Where(u => u.UserId == UserId)
                                         .FirstOrDefaultAsync(p => p.IsMain);
+        }
+
+        public async Task<Like> GetLike(int userId, int recipientId)
+        {
+            return await _context.likes
+                                 .FirstOrDefaultAsync(l => l.LikerId == userId && l.LikeeId == recipientId);
         }
     }
 }

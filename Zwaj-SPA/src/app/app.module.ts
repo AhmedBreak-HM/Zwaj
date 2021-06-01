@@ -38,6 +38,7 @@ import { MemberEditComponent } from './member/member-edit/member-edit.component'
 import { PreventUnsavedChangesGuard } from './services/guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './member/photo-editor/photo-editor.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
+import { ListsResolver } from './resolvers/lists.resolver';
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { TimeAgoPipe } from 'time-ago-pipe';
 
     // Resolvers
     MemberDetailsResolver,
+    ListsResolver,
 
     // Services
     AuthService,
