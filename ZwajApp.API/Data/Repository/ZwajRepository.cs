@@ -124,5 +124,20 @@ namespace ZwajApp.API.Data
             return await _context.likes
                                  .FirstOrDefaultAsync(l => l.LikerId == userId && l.LikeeId == recipientId);
         }
+
+        public async Task<Message> GetMessage(int id)
+        {
+           return await _context.Messages.FirstOrDefaultAsync(m => m.Id == id);
+        }
+
+        public async Task<PagedList<Message>> GetMessages()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Message>> GetConversation(int senderId, int recipientId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
