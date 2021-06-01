@@ -22,6 +22,8 @@ namespace ZwajApp.API.Models
         public ICollection<Photo> Photos { get; set; }
         public ICollection<Like> likers { get; set; }
         public ICollection<Like> likees { get; set; }
+        public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
 
     }
 }
