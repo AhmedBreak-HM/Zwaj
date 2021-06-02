@@ -22,14 +22,20 @@ namespace ZwajApp.API.Helper
             CreateMap<Photo, PhotoForDetailsDto>();
 
             CreateMap<UserForUpdateDto, User>();
-            
-            CreateMap<PhotoForCreateDto,Photo>();
-            
-            CreateMap<Photo,PhotoForReturnDto>();
 
-            CreateMap<UserForRegisterDto,User>();
-            
-            // CreateMap<User,UserForDetailsDto>();
+            CreateMap<PhotoForCreateDto, Photo>();
+
+            CreateMap<Photo, PhotoForReturnDto>();
+
+            CreateMap<UserForRegisterDto, User>();
+
+            CreateMap<MessgeForCreationDto, Message>().ReverseMap();
+
+            CreateMap<Message, MessageForReturnDto>()
+            .ForMember(dest => dest.SenderPhotoUrl,opt => 
+                       opt.ResolveUsing(scr => scr.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
+            .ForMember(dest => dest.RecipientPhotoUrl,opt => 
+                       opt.ResolveUsing(scr => scr.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
 
         }
     }

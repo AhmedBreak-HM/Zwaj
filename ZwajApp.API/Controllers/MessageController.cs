@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -22,6 +23,23 @@ namespace ZwajApp.API.Controllers
         {
             _mapper = mapper;
             _repo = repo;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetMessagesForUser(int userId, [FromQuery] MessageParams messageParams)
+        {
+
+            var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (userIdFromToken != userId) return Unauthorized();
+            messageParams.UserId = userId;
+            var messagesFromRepo = await _repo.GetMessagesForUser(messageParams);
+            var messges = _mapper.Map<IEnumerable<MessageForReturnDto>>(messagesFromRepo);
+            Response.AddApplicationPagenation(messagesFromRepo.CurrentPage, messagesFromRepo.PageSize,
+                                              messagesFromRepo.Count, messagesFromRepo.TotlePages);
+
+            return Ok(messges);
+
+
         }
 
         [HttpGet("{id}", Name = "GetMessage")]
