@@ -70,5 +70,17 @@ namespace ZwajApp.API.Controllers
             return BadRequest("save message has error");
         }
 
+        [HttpGet("chat/{recipientId}")]
+        public async Task<IActionResult> GetConversation(int userId, int recipientId)
+        {
+            var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (userIdFromToken != userId) return Unauthorized();
+
+            var messagesFromRepo = await _repo.GetConversation(userId, recipientId);
+            var messagesToReturn = _mapper.Map<IEnumerable<MessageForReturnDto>>(messagesFromRepo);
+
+            return Ok(messagesToReturn);
+        }
+
     }
 }
