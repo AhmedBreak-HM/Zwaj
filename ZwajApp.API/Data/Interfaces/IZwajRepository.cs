@@ -16,7 +16,7 @@ namespace ZwajApp.API.Data
         Task<Photo> GetPhotoByUser(int UserId);
         Task<Like> GetLike(int userId, int recipientId);
         Task<Message> GetMessage(int id);
-        Task<PagedList<Message>> GetMessages();
+        Task<PagedList<Message>> GetMessagesForUser(MessageParams messageParams);
         Task<IEnumerable<Message>> GetConversation(int senderId, int recipientId);
     }
 }
