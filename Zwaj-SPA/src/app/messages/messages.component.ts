@@ -13,9 +13,10 @@ import { UserService } from '../services/user.service';
 })
 export class MessagesComponent implements OnInit {
 
-  messges: Message[];
-  pagenation: Pagenation;
+  messages: Message[];
+  pagination: Pagenation;
   messageType = 'Unread';
+  search: boolean = false;
 
   constructor(private userServices: UserService, private authServices: AuthService,
               private route: ActivatedRoute, private alert: AlertifyService) { }
@@ -23,20 +24,24 @@ export class MessagesComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(
       res => {
-        this.messges = res['messages'].result;
-        this.pagenation = res['messages'].pagenation;
+        this.messages = res['messages'].result;
+        this.pagination = res['messages'].pagenation;
       }
     );
   }
   loadMessages() {
-    this.userServices.getMessage(this.authServices.decodedToken.nameid, this.pagenation.currentPage,
-      this.pagenation.itemsPerPage, this.messageType).subscribe(res => {
-        this.messges = res.result;
-        this.pagenation = res.pagenation;
+    if (!this.search) {
+      this.pagination.currentPage = 1;
+
+    }
+    this.userServices.getMessage(this.authServices.decodedToken.nameid, this.pagination.currentPage,
+      this.pagination.itemsPerPage, this.messageType).subscribe(res => {
+        this.messages = res.result;
+        this.pagination = res.pagenation;
       }, err => this.alert.error(err));
   }
   pageChanged(event: any): void {
-    this.pagenation.currentPage = event.page;
+    this.pagination.currentPage = event.page ;
     this.loadMessages();
   }
 }

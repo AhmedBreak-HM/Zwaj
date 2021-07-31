@@ -46,12 +46,11 @@ export class AuthService {
       const token = localStorage.getItem('token');
       this.DecodToken = this.jwtHelper.decodeToken(token);
       return !this.jwtHelper.isTokenExpired(token);
-    }
-    catch {
+    } catch {
       return false;
     }
   }
-  DecodToken() {
+  DecodToken(): any {
     const token = localStorage.getItem('token');
     const user = this.jwtHelper.decodeToken(token);
     return user;
