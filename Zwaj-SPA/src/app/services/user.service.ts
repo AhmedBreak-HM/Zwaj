@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Message } from '../models/message';
 import { PagenationResult } from '../models/PagenationResult';
 import { User } from '../models/user';
 import { UserParams } from '../models/UserParams';
@@ -20,13 +21,13 @@ import { UserParams } from '../models/UserParams';
 })
 export class UserService {
 
-  baseURl: string = environment.baseUrl + 'Users/'
+  baseURl: string = environment.baseUrl + 'Users/';
 
   constructor(private http: HttpClient) { }
 
   getUsers(currentPage?: number, itemsPerPage?: number, userParams?: UserParams, likeParam?: string): Observable<PagenationResult<User[]>> {
     const pagenationResulr = new PagenationResult<User[]>();
-    let params = new HttpParams;
+    let params = new HttpParams();
     if (currentPage > 0 && itemsPerPage > 0) {
       params = params.append('pageNumber', currentPage.toString());
       params = params.append('pageSize', itemsPerPage.toString());
@@ -73,7 +74,28 @@ export class UserService {
 
 
   deletePhoto(userId: number, id: number) {
-    return this.http.delete(`${this.baseURl}${userId}/photos/${id}`)
+    return this.http.delete(`${this.baseURl}${userId}/photos/${id}`);
+  }
+  getMessage(id: number, currentPage?: number, itemsPerPage?: number, messageType?: string) {
+
+    const pagenationResult = new PagenationResult<Message[]>();
+    let params: HttpParams = new HttpParams();
+    params = params.append('MessageType', messageType);
+    if (currentPage > 0 && itemsPerPage > 0) {
+      params = params.append('pageNumber', currentPage.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
+    }
+    return this.http.get<Message[]>(`${this.baseURl}${id}/message`, { observe: 'response', params }).pipe(
+      map(res => {
+        pagenationResult.result = res.body;
+        if (res.headers.get('Pagination') !== null) {
+          pagenationResult.pagenation = JSON.parse(res.headers.get('Pagination'));
+        }
+        return pagenationResult;
+      })
+
+    );
+
   }
 
 

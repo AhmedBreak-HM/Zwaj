@@ -12,7 +12,7 @@ export class ListsResolver implements Resolve<User[]> {
   pageSize = 6;
   likeParam = 'likers';
   constructor(private userService: UserService, private alert: AlertifyService,
-    private router: Router) {
+              private router: Router) {
 
   }
   resolve(route: ActivatedRouteSnapshot): Observable<User[]> {

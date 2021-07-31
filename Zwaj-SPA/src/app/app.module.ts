@@ -39,6 +39,7 @@ import { PreventUnsavedChangesGuard } from './services/guards/prevent-unsaved-ch
 import { PhotoEditorComponent } from './member/photo-editor/photo-editor.component';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { ListsResolver } from './resolvers/lists.resolver';
+import { MessageResolver } from './resolvers/message.resolver';
 
 
 @NgModule({
@@ -98,6 +99,7 @@ import { ListsResolver } from './resolvers/lists.resolver';
     // Resolvers
     MemberDetailsResolver,
     ListsResolver,
+    MessageResolver,
 
     // Services
     AuthService,

@@ -20,6 +20,7 @@ export class NavComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.authService.DecodToken();
+    this.authService.decodedToken = this.user;
     this.currentUser = this.authService.curentUser;
     this.authService.currentPhotUrl.subscribe(res =>
       this.photoUrl = res
