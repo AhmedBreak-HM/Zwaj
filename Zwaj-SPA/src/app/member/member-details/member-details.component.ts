@@ -12,22 +12,24 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MemberDetailsComponent implements OnInit {
   user: User;
-  ReadMoreIntro:boolean = true;
-  ReadMorelookFor:boolean = true;
-  ReadMoreInterests:boolean = true;
-  created:string;
-  age:string;
+  ReadMoreIntro: boolean = true;
+  ReadMorelookFor: boolean = true;
+  ReadMoreInterests: boolean = true;
+  created: string;
+  age: string;
 
 
   constructor(private userService: UserService, private alert: AlertifyService,
-    private route: ActivatedRoute) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe(res => {
       this.user = res['user'];
     });
     // this.loadUser();
-    this.created = new Date(this.user.created).toLocaleString('ar-EG', {weekday : 'long' , year :'numeric' , month : 'long',day:'numeric'}).replace('،','');
+    this.created = new Date(this.user.created)
+                          .toLocaleString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+                          .replace('،', '');
     this.age = this.user.age.toLocaleString('ar-EG');
 
   }

@@ -40,6 +40,7 @@ import { PhotoEditorComponent } from './member/photo-editor/photo-editor.compone
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { ListsResolver } from './resolvers/lists.resolver';
 import { MessageResolver } from './resolvers/message.resolver';
+import { MemberMessagesComponent } from './member/member-messages/member-messages.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { MessageResolver } from './resolvers/message.resolver';
     MemberGalleryComponent,
     MemberEditComponent,
     PhotoEditorComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    MemberMessagesComponent
   ],
   imports: [
     BrowserModule,

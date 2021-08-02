@@ -98,5 +98,9 @@ export class UserService {
 
   }
 
+  getConverstion(id: number, recipientId: number) {
+    return this.http.get<Message[]>(`${this.baseURl}${id}/message/chat/${recipientId}`);
+
+  }
 
 }
