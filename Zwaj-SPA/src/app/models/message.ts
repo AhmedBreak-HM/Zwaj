@@ -8,8 +8,8 @@ export interface Message {
   recipientKnownAs: string;
   recipientPhotoUrl: string;
   content: string;
-  isread: boolean;
-  dateread: Date;
+  isRead:boolean;
+  dateRead: Date;
   messageSent: Date;
   senderDeleted: boolean;
   recipientDeleted: boolean;
