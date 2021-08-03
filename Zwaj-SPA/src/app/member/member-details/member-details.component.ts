@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { User } from 'src/app/models/user';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { UserService } from 'src/app/services/user.service';
@@ -17,21 +18,33 @@ export class MemberDetailsComponent implements OnInit {
   ReadMoreInterests: boolean = true;
   created: string;
   age: string;
+  @ViewChild('staticTabs', { static: true }) staticTabs: TabsetComponent;
 
 
   constructor(private userService: UserService, private alert: AlertifyService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+
     this.route.data.subscribe(res => {
       this.user = res['user'];
     });
+    this.route.queryParams.subscribe(res => {
+      const selectedTab = res['tab'];
+      if (selectedTab > 0) {
+        this.staticTabs.tabs[selectedTab].active = true;
+      }
+    });
     // this.loadUser();
     this.created = new Date(this.user.created)
-                          .toLocaleString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
-                          .replace('،', '');
+      .toLocaleString('ar-EG', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+      .replace('،', '');
     this.age = this.user.age.toLocaleString('ar-EG');
 
+  }
+
+  selectTab(tabId: number) {
+    this.staticTabs.tabs[tabId].active = true;
   }
 
   // loadUser() {
