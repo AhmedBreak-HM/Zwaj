@@ -59,11 +59,12 @@
   </div>
 
   <div class="card-footer">
-      <form>
+      <form #messageForm="ngForm" (ngSubmit)="messageForm.valid && senMessage()">
           <div class="input-group">
-              <input type="text" name="content" required class="form-control input-sm" placeholder="أكتب رسالتك هنا">
+              <input type="text" name="content" required class="form-control input-sm" placeholder="أكتب رسالتك هنا"
+              [(ngModel)]="newMessage.content" required >
               <div class="input-group-append">
-                  <button class="btn btn-primary ml-1">إرسال</button>
+                  <button class="btn btn-primary ml-1" type="submit" [disabled]="messageForm.invalid">إرسال</button>
               </div>
           </div>
       </form>

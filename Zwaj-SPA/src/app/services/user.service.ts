@@ -102,5 +102,8 @@ export class UserService {
     return this.http.get<Message[]>(`${this.baseURl}${id}/message/chat/${recipientId}`);
 
   }
+  sendMessage(userId: number, message: Message) {
+    return this.http.post(`${this.baseURl}${userId}/message/`, message);
+  }
 
 }

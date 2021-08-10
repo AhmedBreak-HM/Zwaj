@@ -57,16 +57,20 @@ namespace ZwajApp.API.Controllers
         [HttpPost()]
         public async Task<IActionResult> CreateMessge(int userId, MessgeForCreationDto messgeForCreationDto)
         {
+            var sender = await _repo.GetUser(userId);
             var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            if (userIdFromToken != userId) return Unauthorized();
+            if (sender.Id != userIdFromToken) return Unauthorized();
             messgeForCreationDto.SenderId = userId;
             var userFromRepo = await _repo.GetUser(messgeForCreationDto.RecipientId);
             if (userFromRepo == null) return NotFound(" This Recipient is not found in database");
             var messgeForCreated = _mapper.Map<Message>(messgeForCreationDto);
             _repo.Add<Message>(messgeForCreated);
-            var userToReturn = _mapper.Map<MessgeForCreationDto>(messgeForCreated);
             if (await _repo.SaveAll())
-                return CreatedAtRoute("GetMessage", new { id = messgeForCreated.Id }, userToReturn);
+            {
+                var messgeToReturn = _mapper.Map<MessageForReturnDto>(messgeForCreated);
+                return CreatedAtRoute("GetMessage", new { id = messgeForCreated.Id }, messgeToReturn);
+
+            }
             return BadRequest("save message has error");
         }
 

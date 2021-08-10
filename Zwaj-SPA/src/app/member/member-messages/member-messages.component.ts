@@ -12,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class MemberMessagesComponent implements OnInit {
   @Input() recipientId: number;
   messages: Message[];
+  newMessage: any = {};
   constructor(private userService: UserService, private authService: AuthService,
               private alert: AlertifyService) { }
 
@@ -22,6 +23,14 @@ export class MemberMessagesComponent implements OnInit {
     this.userService.getConverstion(this.authService.decodedToken.nameid, this.recipientId).subscribe(res => {
       this.messages = res;
     }, err => this.alert.error(err));
+  }
+  senMessage() {
+    this.newMessage.recipientId = this.recipientId;
+    this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage).subscribe((res: Message) => {
+      this.messages.push(res);
+      this.newMessage.content = '';
+
+    });
   }
 
 }
