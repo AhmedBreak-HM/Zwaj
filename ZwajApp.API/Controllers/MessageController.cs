@@ -61,8 +61,8 @@ namespace ZwajApp.API.Controllers
             var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             if (sender.Id != userIdFromToken) return Unauthorized();
             messgeForCreationDto.SenderId = userId;
-            var userFromRepo = await _repo.GetUser(messgeForCreationDto.RecipientId);
-            if (userFromRepo == null) return NotFound(" This Recipient is not found in database");
+            var recipientFromRepo = await _repo.GetUser(messgeForCreationDto.RecipientId);
+            if (recipientFromRepo == null) return NotFound(" This Recipient is not found in database");
             var messgeForCreated = _mapper.Map<Message>(messgeForCreationDto);
             _repo.Add<Message>(messgeForCreated);
             if (await _repo.SaveAll())
