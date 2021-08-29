@@ -1,5 +1,6 @@
 import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { tap } from 'rxjs/operators';
 import { Message } from 'src/app/models/message';
 import { AlertifyService } from 'src/app/services/alertify.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,7 +16,8 @@ export class MemberMessagesComponent implements OnInit, AfterViewChecked {
   @ViewChild('panal', { static: false }) panal: ElementRef<any>;
   messages: Message[];
   newMessage: any = {};
-  hubConnection: HubConnection;
+  // hubConnection: HubConnection; remove to authservices golabl variable
+  hubConnection2: HubConnection;
   constructor(private userService: UserService, private authService: AuthService,
               private alert: AlertifyService) { }
   ngAfterViewChecked(): void {
@@ -24,26 +26,51 @@ export class MemberMessagesComponent implements OnInit, AfterViewChecked {
 
   ngOnInit() {
     this.loadMessage();
-    this.hubConnection = new HubConnectionBuilder().withUrl('http://localhost:5000/chat').build();
-    this.hubConnection.start();
-    this.hubConnection.on('refresh', () => {
-      setTimeout(() => {
+    this.hubConnection2 = new HubConnectionBuilder().withUrl('http://localhost:5000/chat').build();
+    this.hubConnection2.start();
+
+    this.authService.hubConnection.start();
+    this.authService.hubConnection.on('refresh', () => {
         this.loadMessage();
-      }, 500);
     });
 
   }
   loadMessage() {
-    this.userService.getConverstion(this.authService.decodedToken.nameid, this.recipientId).subscribe(res => {
+    const userId =  this.authService.decodedToken.nameid as number;
+    this.userService.getConverstion(userId, this.recipientId).pipe(
+      tap(messages => {
+        for (const message of messages) {
+          if (message.isRead === false && message.recipientId === userId) {
+            this.userService.markIsRead(userId, message.id);
+          }
+        }
+      })
+    )
+    .subscribe(res => {
       this.messages = res.reverse();
-    }, err => this.alert.error(err));
+    }, err => this.alert.error(err), () => {
+      setTimeout(() => {
+        this.userService.unReadMessageCount(userId).subscribe((res: number) => {
+          this.authService.unReadMessageCount.next(res);
+          setTimeout(() => {
+            this.userService.getConverstion(userId, this.recipientId).subscribe( messages=>this.messages=messages.reverse());
+            }, 3000);
+        });
+      }, 1000);
+    });
   }
   senMessage() {
     this.newMessage.recipientId = this.recipientId;
     this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage).subscribe((res: Message) => {
       // this.messages.push(res);
       this.newMessage.content = '';
-      this.hubConnection.invoke('refresh');
+      this.authService.hubConnection.invoke('refresh');
+
+    }, error => this.alert.error(error), () => {
+      setTimeout(() => {
+        this.hubConnection2.invoke('count');
+        this.loadMessage();
+      }, 0);
 
     });
   }

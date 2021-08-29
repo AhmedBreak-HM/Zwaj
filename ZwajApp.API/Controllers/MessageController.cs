@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -81,9 +82,47 @@ namespace ZwajApp.API.Controllers
             if (userIdFromToken != userId) return Unauthorized();
 
             var messagesFromRepo = await _repo.GetConversation(userId, recipientId);
+            // foreach (var message in messagesFromRepo)
+            // {
+            //     if (message.IsRead == false && userIdFromToken == message.RecipientId)
+            //     {
+            //         message.IsRead = true;
+            //         message.DateRead = DateTime.Now;
+            //     }
+
+            // }
+            // await _repo.SaveAll();
             var messagesToReturn = _mapper.Map<IEnumerable<MessageForReturnDto>>(messagesFromRepo);
 
             return Ok(messagesToReturn);
+        }
+        [HttpGet("count")]
+        public async Task<IActionResult> GetUnreadMessages(int userId)
+        {
+            var userIdFormToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (userIdFormToken != userId) return Unauthorized();
+
+            var count = await _repo.GetUnReadMessage(userIdFormToken);
+            return Ok(count);
+        }
+
+        [HttpPost("read/{id}")]
+        public async Task<IActionResult> MarkMessageRead(int userId, int id)
+        {
+
+            var userIdFormToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            if (userIdFormToken != userId) return Unauthorized();
+
+            var message = await _repo.GetMessage(id);
+            if (message.RecipientId != userId) return Unauthorized();
+            message.IsRead = true;
+            message.DateRead = DateTime.Now;
+            if (await _repo.SaveAll())
+            {
+                return StatusCode(201);
+            }
+            return BadRequest("this message cant update");
+
         }
 
     }

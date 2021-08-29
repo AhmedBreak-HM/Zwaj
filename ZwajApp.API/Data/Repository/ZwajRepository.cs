@@ -161,5 +161,12 @@ namespace ZwajApp.API.Data
                            .OrderByDescending(m => m.MessageSent).ToListAsync();
             return messages;
         }
+
+        public async Task<int> GetUnReadMessage(int userId)
+        {
+            var messges = await _context.Messages.Where(mes => mes.IsRead == false && mes.RecipientId == userId).ToListAsync();
+            var count = messges.Count();
+            return count;
+        }
     }
 }

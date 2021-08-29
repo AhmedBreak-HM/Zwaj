@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -19,6 +20,10 @@ export class AuthService {
   currentPhotUrl = this.photoUrl.asObservable();
   // Refactoing
   // url:Subject<string>;
+  unReadMessageCount: Subject<number> = new Subject<number>();
+
+  hubConnection: HubConnection = new HubConnectionBuilder().withUrl('http://localhost:5000/chat').build();
+
 
   constructor(private http: HttpClient) { }
 

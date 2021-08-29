@@ -106,4 +106,11 @@ export class UserService {
     return this.http.post(`${this.baseURl}${userId}/message/`, message);
   }
 
+  unReadMessageCount(userId: number) {
+    return this.http.get(`${this.baseURl}${userId}/message/count`);
+  }
+  markIsRead(userId: number, id: number) {
+    return this.http.post(`${this.baseURl}${userId}/message/read/${id}`, {}).subscribe();
+  }
+
 }

@@ -125,7 +125,6 @@ namespace ZwajApp.API
             // Add SignalR Mdillware
             app.UseSignalR(routes => {
                 routes.MapHub<ChatHub>("/chat");
-
             });
 
             // add authentication Midllware

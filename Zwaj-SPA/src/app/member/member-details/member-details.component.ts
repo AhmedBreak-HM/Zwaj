@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { User } from 'src/app/models/user';
 import { AlertifyService } from 'src/app/services/alertify.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -22,7 +23,7 @@ export class MemberDetailsComponent implements OnInit {
 
 
   constructor(private userService: UserService, private alert: AlertifyService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit() {
 
@@ -45,6 +46,11 @@ export class MemberDetailsComponent implements OnInit {
 
   selectTab(tabId: number) {
     this.staticTabs.tabs[tabId].active = true;
+  }
+
+  closeConnenction() {
+    this.authService.hubConnection.stop();
+
   }
 
   // loadUser() {

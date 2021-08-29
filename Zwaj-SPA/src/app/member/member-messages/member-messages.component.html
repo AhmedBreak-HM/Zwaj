@@ -41,8 +41,8 @@
                           <small style="vertical-align: top;margin-right: 5px;" class="text-muted">
                               <span
                                   class="align-middle  fa fa-clock-o"><small>{{message.messageSent | timeAgo}}</small></span>
-                              <strong *ngIf="!message.isRead" class="text-warning align-middle">(غير مقروءة)</strong>
-                              <strong *ngIf="message.isRead" class="text-success align-middle">(مقروءة
+                              <strong *ngIf="!message.isRead" class="text-danger align-middle">(غير مقروءة)</strong>
+                              <strong *ngIf="message.isRead" class="text-warning align-middle">(مقروءة
                                   {{message.dateRead | timeAgo}})</strong>
                           </small>
                       </div>
