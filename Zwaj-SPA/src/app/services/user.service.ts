@@ -112,5 +112,9 @@ export class UserService {
   markIsRead(userId: number, id: number) {
     return this.http.post(`${this.baseURl}${userId}/message/read/${id}`, {}).subscribe();
   }
+  deleteMessage(messageId: number, userId: number) {
+    return this.http.post(`${this.baseURl}${userId}/message/${messageId}`, {});
+
+  }
 
 }

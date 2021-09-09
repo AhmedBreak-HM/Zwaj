@@ -49,10 +49,11 @@ namespace ZwajApp.API.Controllers
             var userIdFromToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             if (userIdFromToken != userId) return Unauthorized();
 
-            var messageFromRepo = await _repo.GetMessage(id);
-            if (messageFromRepo == null) return NotFound("this Message is not found");
+            var messageForDeleteDto = await _repo.GetMessage(id);
 
-            return Ok(messageFromRepo);
+            if (messageForDeleteDto == null) return NotFound("this Message is not found");
+
+            return Ok(messageForDeleteDto);
         }
 
         [HttpPost()]
@@ -125,20 +126,23 @@ namespace ZwajApp.API.Controllers
 
         }
         [HttpPost("{id}")]
-        public async Task<IActionResult> DeleteMessage(int messageId, int userId)
+        public async Task<IActionResult> DeleteMessage(int id, int userId)
         {
 
             var userIdToken = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             if (userIdToken != userId) return Unauthorized();
-            var messageFromRepo = await _repo.GetMessage(messageId);
+            var messageFromRepo = await _repo.GetMessage(id);
+            // var messageForDeleteDto = _mapper.Map<MessageForDeleteDto>(messageFromRepo);
+            if (messageFromRepo == null) return NotFound();
+
             if (messageFromRepo.SenderId == userId)
                 messageFromRepo.SenderDeleted = true;
             if (messageFromRepo.RecipientId == userId)
                 messageFromRepo.RecipientDeleted = true;
             if (messageFromRepo.RecipientDeleted && messageFromRepo.SenderDeleted)
                 _repo.Delete(messageFromRepo);
-            if(await _repo.SaveAll()) return Ok("message is deleted"); 
-            throw new Exception("cant delete message");   
+            if (await _repo.SaveAll()) return Ok("message is deleted");
+            throw new Exception("cant delete message ");
         }
 
     }

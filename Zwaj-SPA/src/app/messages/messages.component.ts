@@ -41,7 +41,19 @@ export class MessagesComponent implements OnInit {
       }, err => this.alert.error(err));
   }
   pageChanged(event: any): void {
-    this.pagination.currentPage = event.page ;
+    this.pagination.currentPage = event.page;
     this.loadMessages();
+  }
+  deleteMessage(messageId: number) {
+    const userId = this.authServices.decodedToken.nameid;
+    this.alert.confirm('هل انت متأكد من حذف الرسالة', () => {
+      this.userServices.deleteMessage(messageId, userId ).subscribe(res => {},
+      error => {
+        const messageIndex = this.messages.findIndex(m => m.id === messageId);
+        this.messages.splice(messageIndex, 1);
+        this.alert.success('تم حذف الرسالة');
+      } );
+    });
+
   }
 }

@@ -32,11 +32,12 @@ namespace ZwajApp.API.Helper
             CreateMap<MessgeForCreationDto, Message>().ReverseMap();
 
             CreateMap<Message, MessageForReturnDto>()
-            .ForMember(dest => dest.SenderPhotoUrl,opt => 
+                    .ForMember(dest => dest.SenderPhotoUrl,opt => 
                        opt.ResolveUsing(scr => scr.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
-            .ForMember(dest => dest.RecipientPhotoUrl,opt => 
+                    .ForMember(dest => dest.RecipientPhotoUrl,opt => 
                        opt.ResolveUsing(scr => scr.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
 
+            CreateMap<Message,MessageForDeleteDto>().ReverseMap();
         }
     }
 }

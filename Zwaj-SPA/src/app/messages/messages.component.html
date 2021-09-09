@@ -43,7 +43,7 @@
         </td>
         <td>{{message.messageSent | timeAgo}}</td>
         <td>
-          <div class="text text-danger"><i style="font-size:28px;" class="fa fa-trash-o" title="حذف"
+          <div (click)="$event.stopPropagation()" (click)="deleteMessage(message.id)" class="text text-danger"><i style="font-size:28px;" class="fa fa-trash-o" title="حذف"
               aria-hidden="true"></i></div>
         </td>
       </tr>
