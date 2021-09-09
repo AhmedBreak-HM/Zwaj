@@ -25,14 +25,14 @@ export class ListsComponent implements OnInit {
         this.users = res['users'].result;
         this.pagenation = res['users'].pagenation;
       }
-    )
+    );
   }
   loadUsers() {
     if (!this.search) {
       this.pagenation.currentPage = 1;
 
     }
-    this.userService.getUsers(this.pagenation.currentPage, this.pagenation.itemsPerPage, null,this.likeParam).subscribe(res => {
+    this.userService.getUsers(this.pagenation.currentPage, this.pagenation.itemsPerPage, null, this.likeParam).subscribe(res => {
       this.users = res.result;
       this.pagenation = res.pagenation;
 
@@ -40,7 +40,7 @@ export class ListsComponent implements OnInit {
   }
 
   pageChanged(event: any): void {
-    this.pagenation.currentPage =event.page ;
+    this.pagenation.currentPage = event.page ;
     this.loadUsers();
   }
 

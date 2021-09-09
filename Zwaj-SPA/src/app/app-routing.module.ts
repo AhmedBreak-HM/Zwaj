@@ -8,6 +8,7 @@ import { MemberListComponent } from './member/member-list/member-list.component'
 import { MessagesComponent } from './messages/messages.component';
 import { ListsResolver } from './resolvers/lists.resolver';
 import { MemberDetailsResolver } from './resolvers/member-details.resolver';
+import { MessageResolver } from './resolvers/message.resolver';
 import { AuthGuard } from './services/guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './services/guards/prevent-unsaved-changes.guard';
 
@@ -29,7 +30,10 @@ const routes: Routes = [
         path: 'lists', component: ListsComponent,
         resolve: { users: ListsResolver }
       },
-      { path: 'messages', component: MessagesComponent },
+      {
+        path: 'messages', component: MessagesComponent,
+        resolve: { messages: MessageResolver }
+      },
     ]
   },
   { path: '**', redirectTo: '', pathMatch: 'full' },

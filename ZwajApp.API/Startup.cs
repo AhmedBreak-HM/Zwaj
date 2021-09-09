@@ -65,6 +65,9 @@ namespace ZwajApp.API
             // Add Action Filter Services LogUseActivity To save laste Active
             services.AddScoped<LogUseActivity>();
 
+            // Add SignalR Services
+            services.AddSignalR();
+
             // add Authentication services
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
             {
@@ -116,8 +119,13 @@ namespace ZwajApp.API
             // app.UseHttpsRedirection();
             // trialData.TrialUsers();
             // add Corss MidllWare 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
             // add Corss MidllWare
+
+            // Add SignalR Mdillware
+            app.UseSignalR(routes => {
+                routes.MapHub<ChatHub>("/chat");
+            });
 
             // add authentication Midllware
             app.UseAuthentication();

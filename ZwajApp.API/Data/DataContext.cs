@@ -11,6 +11,7 @@ namespace ZwajApp.API.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Like> likes { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -29,6 +30,16 @@ namespace ZwajApp.API.Data
                 .WithMany(c => c.likees)
                 .HasForeignKey(bc => bc.LikerId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+
+
+            builder.Entity<Message>().HasOne(bc => bc.Sender)
+                                     .WithMany(bc => bc.MessagesSent)
+                                     .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Message>().HasOne(bc => bc.Recipient)
+                                     .WithMany(bc => bc.MessagesReceived)
+                                     .OnDelete(DeleteBehavior.Restrict);
         }
     }
 
